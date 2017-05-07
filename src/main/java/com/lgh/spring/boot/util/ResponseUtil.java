@@ -17,4 +17,8 @@ public class ResponseUtil {
     public static Response failed(String reason){
         return new Response(FAILED,reason);
     }
+
+    public static Response failed(Object reason){
+        return new Response(FAILED,reason);
+    }
 }
