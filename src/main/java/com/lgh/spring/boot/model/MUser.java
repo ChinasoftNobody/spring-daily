@@ -2,9 +2,10 @@ package com.lgh.spring.boot.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -18,8 +19,6 @@ public class MUser {
     @GenericGenerator(name = "UUID",strategy = "uuid")
     private String id;
     private String name;
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
-    private Set<MCalender> calenders = new HashSet<>();
 
     public String getId() {
         return id;
@@ -35,13 +34,5 @@ public class MUser {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<MCalender> getCalenders() {
-        return calenders;
-    }
-
-    public void setCalenders(Set<MCalender> calenders) {
-        this.calenders = calenders;
     }
 }
