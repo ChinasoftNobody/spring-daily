@@ -9,6 +9,7 @@ import com.lgh.spring.boot.repo.EventRepo;
 import com.lgh.spring.boot.service.dashboard.DashboardService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,9 +27,9 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public Response trendStatistics(String userName) {
-        /*if(StringUtils.isEmpty(userName)){
+        if(StringUtils.isEmpty(userName)){
             return ResponseUtil.failed("userName not found!");
-        }*/
+        }
         List<MEvent> mEventList = eventRepo.findByUserName(userName);
         JSONObject result = statistics(mEventList);
         return ResponseUtil.ok(result);
