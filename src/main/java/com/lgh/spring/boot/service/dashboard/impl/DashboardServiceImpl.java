@@ -37,9 +37,9 @@ public class DashboardServiceImpl implements DashboardService {
 
     private JSONObject statistics(List<MEvent> mEventList) {
         JSONObject result = new JSONObject();
-        result.put("indicator", JSONArray.parseArray("[{ name: '学习', max: 10}," +
-                "{ name: '家庭', max: 10},{ name: '工作', max: 10},{ name: '休闲', max: 10}," +
-                "{ name: '思考', max: 10},{ name: '娱乐', max: 10}]"));
+        result.put("indicator", JSONArray.parseArray("[{ name: '学习', max: 40}," +
+                "{ name: '家庭', max: 12},{ name: '工作', max: 11},{ name: '休闲', max: 30}," +
+                "{ name: '思考', max: 20},{ name: '娱乐', max: 16}]"));
         result.put("data", JSON.parseArray("[{value : [1, 3, 4, 6, 1, 2],name : '日常偏向'}]"));
         if(mEventList == null || mEventList.isEmpty()){
             return result;
