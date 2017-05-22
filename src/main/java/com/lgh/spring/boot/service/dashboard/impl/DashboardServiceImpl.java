@@ -30,8 +30,7 @@ public class DashboardServiceImpl implements DashboardService {
         if(StringUtils.isEmpty(userName)){
             return ResponseUtil.failed("userName not found!");
         }
-        List<MEvent> mEventList = eventRepo.findByUserName(userName);
-        JSONObject result = statistics(mEventList);
+        JSONObject result = statistics(null);
         return ResponseUtil.ok(result);
     }
 

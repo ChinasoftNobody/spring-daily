@@ -2,7 +2,7 @@ package com.lgh.spring.boot.controller.schedule;
 
 import com.lgh.spring.boot.common.Response;
 import com.lgh.spring.boot.model.MEvent;
-import com.lgh.spring.boot.pojo.dashboard.TrendStatisticsRequest;
+import com.lgh.spring.boot.pojo.schedule.ScheduleQuery;
 import com.lgh.spring.boot.service.schedule.ScheduleService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import io.swagger.annotations.Api;
@@ -35,8 +35,8 @@ public class ScheduleController {
     }
 
     @PostMapping(value = "/query")
-    @ApiOperation(value = "find all daily schedule",notes = "find all aily schedule")
-    public Response query(@RequestBody TrendStatisticsRequest request){
-        return ResponseUtil.ok(scheduleService.findByUserName(request.getUserName()));
+    @ApiOperation(value = "find daily schedule pageable",notes = "find aily schedule pageable")
+    public Response query(@RequestBody ScheduleQuery request){
+        return ResponseUtil.ok(scheduleService.findByUserName(request.getUserName(),request.getPageNumber(),request.getPageSize()));
     }
 }

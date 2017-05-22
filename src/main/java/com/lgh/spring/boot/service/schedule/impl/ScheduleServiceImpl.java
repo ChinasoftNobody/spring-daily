@@ -3,10 +3,11 @@ package com.lgh.spring.boot.service.schedule.impl;
 import com.lgh.spring.boot.model.MEvent;
 import com.lgh.spring.boot.repo.EventRepo;
 import com.lgh.spring.boot.service.schedule.ScheduleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -19,8 +20,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     private EventRepo eventRepo;
 
     @Override
-    public List<MEvent> findByUserName(String userName) {
-        return eventRepo.findByUserName(userName);
+    public Page<MEvent> findByUserName(String userName, int pageNumber, int pageSize) {
+        pageNumber = pageNumber < 0 ? 1 : pageNumber;
+        pageSize = pageSize < 0 ? 10 : pageSize;
+        return eventRepo.findByUserName(userName, new PageRequest(pageNumber, pageSize));
     }
 
     @Override
