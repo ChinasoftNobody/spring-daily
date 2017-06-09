@@ -1,10 +1,12 @@
 package com.lgh.spring.boot.pojo.schedule;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/4/3.
  * 日程请求参数
  */
-public class EstablishScheduleRequest {
+public class EstablishScheduleRequest implements Serializable{
     private String user;
     private String date;
     private String timeFrom;
