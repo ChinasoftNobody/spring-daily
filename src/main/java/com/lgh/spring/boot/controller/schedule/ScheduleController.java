@@ -39,7 +39,7 @@ public class ScheduleController {
     }
 
     @PostMapping(value = "/query")
-    @ApiOperation(value = "find daily schedule pageable",notes = "find aily schedule pageable")
+    @ApiOperation(value = "find daily schedule pageable",notes = "find daily schedule pageable")
     public Response query(@RequestBody ScheduleQuery request){
         return ResponseUtil.ok(scheduleService.findByUserName(request.getUserName(),request.getPageNumber(),request.getPageSize()));
     }
