@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  */
 public interface UserRepo extends JpaRepository<MUser,String> {
-
+    MUser findByNameAndPassword(String name,String password);
 }
