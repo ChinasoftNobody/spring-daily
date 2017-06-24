@@ -5,7 +5,7 @@ import com.lgh.spring.boot.model.MUser;
 /**
  * Created by Administrator on 2017/6/22.
  */
-public interface LoginService {
+public interface UserService {
     /**
      * 登录
      *
@@ -14,4 +14,11 @@ public interface LoginService {
      * @return 登陆结果
      */
     MUser login(String name, String password);
+
+    /**
+     * 注册
+     * @param user 用户信息
+     * @return 结果
+     */
+    MUser register(MUser user);
 }
