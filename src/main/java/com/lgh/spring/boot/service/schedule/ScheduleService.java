@@ -1,8 +1,10 @@
 package com.lgh.spring.boot.service.schedule;
 
-import com.alibaba.fastjson.JSONArray;
 import com.lgh.spring.boot.model.MEvent;
+import com.lgh.spring.boot.pojo.schedule.WeekScheduleResponse;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -27,9 +29,9 @@ public interface ScheduleService {
     boolean addEvent(MEvent event);
 
     /**
-     * 查询日历信息
-     * @param month 当前月份
-     * @return  日历信息
+     * 获取当前用户的本周日程
+     * @param userName 当前用户
+     * @return 日程信息
      */
-    JSONArray calendar(String month);
+    List<WeekScheduleResponse> weekSchedule(String userName);
 }

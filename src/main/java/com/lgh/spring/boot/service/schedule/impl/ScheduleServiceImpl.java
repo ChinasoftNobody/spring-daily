@@ -1,19 +1,21 @@
 package com.lgh.spring.boot.service.schedule.impl;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.lgh.spring.boot.common.DateFormat;
 import com.lgh.spring.boot.model.MEvent;
+import com.lgh.spring.boot.pojo.schedule.WeekScheduleResponse;
 import com.lgh.spring.boot.repo.EventRepo;
 import com.lgh.spring.boot.service.schedule.ScheduleService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -39,33 +41,70 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public JSONArray calendar(String month) {
-        JSONArray result = new JSONArray();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
-        Date date;
+    public List<WeekScheduleResponse> weekSchedule(String userName) {
+        List<WeekScheduleResponse> responses = new ArrayList<>();
+        if (StringUtils.isEmpty(userName)) {
+            return responses;
+        }
+        List<MEvent> events = eventRepo.findByUserName(userName);
+        for (MEvent event : events) {
+            WeekScheduleResponse response = new WeekScheduleResponse();
+            String weekDay = transWeekDay(event.getStartTime());
+            if (!StringUtils.isEmpty(weekDay)) {
+                response.setWeekNumber(weekDay);
+                //TODO 组装日程树结构
+            }
+        }
+        return responses;
+    }
+
+    /**
+     * 计算日期是否存在本周，如果是本周，计算出本周几，否则返回null
+     *
+     * @param startTime 时间
+     * @return
+     */
+    public String transWeekDay(String startTime) {
         try {
-            date = format.parse(month);
+            Date date = DateFormat.DATE_TIME_FORMAT.parse(startTime);
+            if (Math.abs(date.compareTo(new Date())) > 6) {
+                return null;
+            } else {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                return transWeek(dayOfWeek);
+            }
         } catch (ParseException e) {
-            date = new Date();
-        }
-        fillCalendar(result, date);
-        return result;
-    }
-
-    private void fillCalendar(JSONArray result, Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        calendar.add(Calendar.DATE, -dayOfWeek + 1);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        for (int i = 0; i < 42; i++) {
-            JSONObject day = new JSONObject();
-            day.put("day", calendar.get(Calendar.DATE));
-            day.put("date", format.format(calendar.getTime()));
-            result.add(day);
-            calendar.add(Calendar.DATE, 1);
+            return null;
         }
     }
 
-
+    private String transWeek(int dayOfWeek) {
+        String s = "";
+        switch (dayOfWeek) {
+            case 1:
+                s = "周日";
+                break;
+            case 2:
+                s = "周一";
+                break;
+            case 3:
+                s = "周二";
+                break;
+            case 4:
+                s = "周三";
+                break;
+            case 5:
+                s = "周四";
+                break;
+            case 6:
+                s = "周五";
+                break;
+            case 7:
+                s = "周六";
+                break;
+        }
+        return s;
+    }
 }
