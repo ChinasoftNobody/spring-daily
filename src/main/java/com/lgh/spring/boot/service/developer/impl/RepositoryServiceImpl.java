@@ -1,0 +1,29 @@
+package com.lgh.spring.boot.service.developer.impl;
+
+import com.lgh.spring.boot.model.MRepository;
+import com.lgh.spring.boot.pojo.developer.RepositoryRequest;
+import com.lgh.spring.boot.repo.RepositoryRepo;
+import com.lgh.spring.boot.service.developer.RepositoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+/**
+ * Created by Administrator on 2017/7/29.
+ */
+@Service
+public class RepositoryServiceImpl implements RepositoryService {
+    @Resource
+    private RepositoryRepo repositoryRepo;
+
+    @Override
+    public Page<MRepository> list(RepositoryRequest request) {
+        return repositoryRepo.findByNameContaining(request,request.getKeywords());
+    }
+
+    @Override
+    public boolean createOrUpdateRepository(MRepository repository) {
+        return repositoryRepo.save(repository) == null;
+    }
+}
