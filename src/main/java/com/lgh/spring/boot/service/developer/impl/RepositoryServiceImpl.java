@@ -5,6 +5,7 @@ import com.lgh.spring.boot.pojo.developer.RepositoryRequest;
 import com.lgh.spring.boot.repo.RepositoryRepo;
 import com.lgh.spring.boot.service.developer.RepositoryService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Page<MRepository> list(RepositoryRequest request) {
-        return repositoryRepo.findByNameContaining(request,request.getKeywords());
+        return repositoryRepo.findByNameContaining(new PageRequest(request.getPageNumber(),request.getPageSize()),request.getKeywords());
     }
 
     @Override
