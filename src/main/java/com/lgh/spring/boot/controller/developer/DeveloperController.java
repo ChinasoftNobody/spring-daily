@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/29.
@@ -36,5 +37,11 @@ public class DeveloperController {
     @ApiOperation(value = "update a repository",notes = "update a repository")
     public Response updateRepository(@RequestBody MRepository repository){
         return ResponseUtil.ok(repositoryService.createOrUpdateRepository(repository));
+    }
+
+    @PostMapping(value = "/repository/delete",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "delete repository",notes = "delete repository")
+    public Response deleteRepository(@RequestBody List<String> ids){
+        return ResponseUtil.ok(repositoryService.deleteRepositories(ids));
     }
 }
