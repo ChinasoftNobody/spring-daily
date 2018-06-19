@@ -6,7 +6,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Administrator on 2017/5/7.
+ *
+ * @author Administrator
+ * @date 2017/5/7
  */
 public interface AuthService {
     /**

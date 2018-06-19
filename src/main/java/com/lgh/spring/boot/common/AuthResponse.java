@@ -1,7 +1,9 @@
 package com.lgh.spring.boot.common;
 
 /**
- * Created by Administrator on 2017/5/7.
+ *
+ * @author Administrator
+ * @date 2017/5/7
  */
 public class AuthResponse {
     private boolean access;

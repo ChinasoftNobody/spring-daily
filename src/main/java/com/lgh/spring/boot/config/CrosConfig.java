@@ -7,7 +7,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * Created by Administrator on 2017/3/29.
+ *
+ * @author Administrator
+ * @date 2017/3/29
  */
 @Configuration
 public class CrosConfig {
@@ -22,7 +24,7 @@ public class CrosConfig {
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", buildConfig()); // 4
+        source.registerCorsConfiguration("/**", buildConfig());
         return new CorsFilter(source);
     }
 }

@@ -3,7 +3,9 @@ package com.lgh.spring.boot.service.login;
 import com.lgh.spring.boot.model.MUser;
 
 /**
- * Created by Administrator on 2017/6/22.
+ *
+ * @author Administrator
+ * @date 2017/6/22
  */
 public interface UserService {
     /**

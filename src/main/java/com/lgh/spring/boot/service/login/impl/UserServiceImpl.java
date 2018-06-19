@@ -9,7 +9,9 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 /**
- * Created by Administrator on 2017/6/22.
+ *
+ * @author Administrator
+ * @date 2017/6/22
  */
 @Service
 public class UserServiceImpl implements UserService {
