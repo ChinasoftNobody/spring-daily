@@ -7,6 +7,7 @@ import com.lgh.spring.boot.util.ResponseUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class LoginController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "登录", notes = "登录")
     public Response login(@RequestBody MUser user) {
         MUser user1 = userService.login(user.getName(),user.getPassword());
@@ -35,7 +36,7 @@ public class LoginController {
         return ResponseUtil.ok(user1);
     }
 
-    @RequestMapping(value = "/register",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/register",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "注册",notes = "注册")
     public Response register(@RequestBody MUser user){
         MUser user1 = userService.register(user);
