@@ -39,11 +39,11 @@ public class ControllerHandler {
     public Response beforeAction(ProceedingJoinPoint joinPoint) {
         long beginTime = System.currentTimeMillis();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        AuthResponse authResponse = authService.validAuth(joinPoint,request);
+        /*AuthResponse authResponse = authService.validAuth(joinPoint,request);
         if(authResponse != null && !authResponse.isAccess()){
             logger.info("[time:{}ms] Auth not access:{}",System.currentTimeMillis() - beginTime,authResponse.getMsg());
             return ResponseUtil.failed(authResponse);
-        }
+        }*/
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method controller = signature.getMethod();
         Response response;
