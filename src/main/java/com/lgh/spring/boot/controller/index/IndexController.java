@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.controller.login;
+package com.lgh.spring.boot.controller.index;
 
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.service.login.UserService;
