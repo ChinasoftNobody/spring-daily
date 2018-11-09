@@ -9,18 +9,9 @@ import com.lgh.spring.boot.model.MUser;
  */
 public interface UserService {
     /**
-     * 登录
-     *
-     * @param name     用户名
-     * @param password 密码
-     * @return 登陆结果
+     * 查询
+     * @return 第一个用户
      */
-    MUser login(String name, String password);
+    MUser login();
 
-    /**
-     * 注册
-     * @param user 用户信息
-     * @return 结果
-     */
-    MUser register(MUser user);
 }

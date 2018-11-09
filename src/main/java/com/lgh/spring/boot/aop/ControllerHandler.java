@@ -1,8 +1,6 @@
 package com.lgh.spring.boot.aop;
 
-import com.lgh.spring.boot.common.AuthResponse;
 import com.lgh.spring.boot.common.Response;
-import com.lgh.spring.boot.service.auth.AuthService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,11 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
@@ -27,8 +21,6 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class ControllerHandler {
-    @Resource
-    private AuthService authService;
 
     private static Logger logger = LoggerFactory.getLogger(ControllerHandler.class);
     @Pointcut("execution( * com.lgh.spring.boot.controller.*.*(..))")
@@ -38,12 +30,6 @@ public class ControllerHandler {
     @Around("pointCutAt()")
     public Response beforeAction(ProceedingJoinPoint joinPoint) {
         long beginTime = System.currentTimeMillis();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        /*AuthResponse authResponse = authService.validAuth(joinPoint,request);
-        if(authResponse != null && !authResponse.isAccess()){
-            logger.info("[time:{}ms] Auth not access:{}",System.currentTimeMillis() - beginTime,authResponse.getMsg());
-            return ResponseUtil.failed(authResponse);
-        }*/
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method controller = signature.getMethod();
         Response response;
