@@ -11,7 +11,8 @@ public interface UserService {
     /**
      * 查询
      * @return 第一个用户
+     * @param user
      */
-    MUser login();
+    MUser login(MUser user);
 
 }

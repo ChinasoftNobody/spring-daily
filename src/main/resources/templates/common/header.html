@@ -1,0 +1,6 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+    <nav class="app-header navbar navbar-default">
+        <p class="navbar-text navbar-left">A well-organized life makes us happy</p>
+        <p class="navbar-text navbar-right" style="margin-right: 0;">Signed in as <a th:href="${login==true?'login':'user'}" class="navbar-link" th:text="${login==true?user.name:'NA'}"></a></p>
+    </nav>
+</div>

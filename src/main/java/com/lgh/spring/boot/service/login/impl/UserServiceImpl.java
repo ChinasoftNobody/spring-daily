@@ -6,6 +6,7 @@ import com.lgh.spring.boot.service.login.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -13,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public MUser login() {
-        return userMapper.first();
+    public MUser login(MUser user) {
+        return userMapper.selectByNameAndPassword(user.getName(), user.getPassword());
     }
 }

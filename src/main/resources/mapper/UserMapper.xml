@@ -6,4 +6,8 @@
     <select id="first" resultType="com.lgh.spring.boot.model.MUser">
         SELECT * FROM t_user limit 1;
     </select>
+
+    <select id="selectByNameAndPassword" resultType="com.lgh.spring.boot.model.MUser">
+        SELECT * FROM t_user WHERE `name` = #{name} AND `password` = #{password};
+    </select>
 </mapper>

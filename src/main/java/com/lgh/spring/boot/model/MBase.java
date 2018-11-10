@@ -3,7 +3,7 @@ package com.lgh.spring.boot.model;
 public class MBase {
     private String createOn;
     private String updateOn;
-    private boolean delete;
+    private boolean del;
 
     public String getCreateOn() {
         return createOn;
@@ -22,11 +22,11 @@ public class MBase {
     }
 
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isDel() {
+        return del;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDel(boolean del) {
+        this.del = del;
     }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Daily Life</title>
+    <link rel="icon" th:href="@{/static/favicon.png}">
+    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/popper.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <!-- 此项目样式 -->
+    <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/static/js/user/login.js}"></script>
+</head>
+<body>
+<!-- header -->
+<div th:include="/common/header::header"></div>
+
+<div class="app-dashboard-bg">
+    <div th:if="${!login}">
+        <div class="jumbotron">
+            <h1>Get to start!</h1>
+            <p>Log in to your information</p>
+            <p><a role="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#LoginModal">I got a
+                account</a>
+                <a role="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#RegisterModal">I
+                    have nothing</a></p>
+        </div>
+        <!-- Modal of login -->
+        <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form th:action="@{/user/login}" method="post" th:object="${user}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Login</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" placeholder="Username"
+                                       aria-describedby="sizing-addon1" id="login_user_name" th:field="*{name}">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">_/</span>
+                                <input type="password" class="form-control" placeholder="Password"
+                                       aria-describedby="sizing-addon1" id="login_user_password" th:field="*{password}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Model of register -->
+        <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form th:action="@{/user/register}" method="post" th:object="${user}">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Register</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">@</span>
+                                <input th:field="*{name}" type="text" class="form-control" placeholder="Username"
+                                       aria-describedby="sizing-addon1" id="register_user_name">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">_/</span>
+                                <input th:field="*{password}" type="password" class="form-control"
+                                       placeholder="Password" aria-describedby="sizing-addon1"
+                                       id="register_user_password">
+                            </div>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">_/</span>
+                                <input type="password" class="form-control" placeholder="Password"
+                                       aria-describedby="sizing-addon1" id="register_user_password_repeat">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" onsubmit="checkPassword()">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-dashboard-container" th:if="${login}">
+        <h1 th:text="'Hello '+${user.name}"></h1>
+    </div>
+</div>
+<!-- footer -->
+<div th:include="/common/footer::footer"></div>
+</body>
+</html>

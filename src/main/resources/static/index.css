@@ -1,2 +1,2 @@
-body{background: #FFFFFF}
-.app-header{background: #222222;color: #FFFFFF;height: 2em;width: 100%;text-align: center;font-size: 16pt;line-height: 2em;}
+.app-header{background: #FFFFFF;font-size: 16pt;}
+.app-footer{background: black;font-size: 12pt;color:white;line-height: 2em;}

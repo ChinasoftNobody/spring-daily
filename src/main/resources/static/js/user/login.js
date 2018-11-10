@@ -1,0 +1,3 @@
+function checkPassword() {
+    return false;
+}
