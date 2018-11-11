@@ -1,6 +1,26 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
     <nav class="app-header navbar navbar-default">
-        <p class="navbar-text navbar-left">A well-organized life makes us happy</p>
-        <p class="navbar-text navbar-right" style="margin-right: 0;">Signed in as <a th:href="${login==true?'login':'user'}" class="navbar-link" th:text="${login==true?user.name:'NA'}"></a></p>
+        <!--<p class="navbar-text navbar-left">A well-organized life makes us happy</p>-->
+        <!--<p class="navbar-text navbar-right" style="margin-right: 0;">Signed in as-->
+            <!--&lt;!&ndash;<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"-->
+               <!--th:text="${session.user==null?'NA':session.user.name}"><span class="caret"></span></a>&ndash;&gt;-->
+            <!---->
+        <!--</p>-->
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="text">
+                <p class="app-header">A well-organized life makes us happy</p></li>
+            <li role="presentation" class="navbar-right dropdown" style="margin-right: 0;">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false" th:utext="${session.user==null?'NA':session.user.name} + '&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;'">
+                </a>
+                <ul class="dropdown-menu list-group" th:if="${session.user!=null}">
+                    <a role="button" class="list-group-item" th:href="@{/user/info}">Setting</a>
+                    <a role="button" class="list-group-item" th:href="@{/user/logout}">Logout</a>
+                </ul>
+            </li>
+        </ul>
     </nav>
+
+
 </div>

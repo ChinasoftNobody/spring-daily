@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Daily Life</title>
@@ -20,7 +21,7 @@
 <div th:include="/common/header::header"></div>
 
 <div class="app-dashboard-bg">
-    <div th:if="${!login}">
+    <div th:if="${session.user==null}">
         <div class="jumbotron">
             <h1>Get to start!</h1>
             <p>Log in to your information</p>
@@ -96,8 +97,8 @@
             </div>
         </div>
     </div>
-    <div class="app-dashboard-container" th:if="${login}">
-        <h1 th:text="'Hello '+${user.name}"></h1>
+    <div class="app-dashboard-container" th:if="${session.user!=null}">
+        <h1 th:text="'Hello '+${session.user.name}"></h1>
     </div>
 </div>
 <!-- footer -->
