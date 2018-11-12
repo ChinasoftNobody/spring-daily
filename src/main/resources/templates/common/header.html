@@ -15,7 +15,7 @@
                    aria-expanded="false" th:utext="${session.user==null?'NA':session.user.name} + '&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;'">
                 </a>
                 <ul class="dropdown-menu list-group" th:if="${session.user!=null}">
-                    <a role="button" class="list-group-item" th:href="@{/user/info}">Setting</a>
+                    <a role="button" class="list-group-item" th:href="@{/user/setting}">Setting</a>
                     <a role="button" class="list-group-item" th:href="@{/user/logout}">Logout</a>
                 </ul>
             </li>

@@ -17,4 +17,17 @@ public class UserServiceImpl implements UserService {
     public MUser login(MUser user) {
         return userMapper.selectByNameAndPassword(user.getName(), user.getPassword());
     }
+
+    @Override
+    public MUser queryByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
+    @Override
+    public MUser register(MUser user) {
+        if(!userMapper.insert(user)){
+            return null;
+        }
+        return user;
+    }
 }

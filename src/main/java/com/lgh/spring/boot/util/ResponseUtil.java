@@ -1,24 +1,25 @@
 package com.lgh.spring.boot.util;
 
-import com.lgh.spring.boot.common.Response;
+import com.lgh.spring.boot.pojo.common.Response;
 
-/**
- * Created by Administrator on 2017/3/4.
- */
 public class ResponseUtil {
 
-    private static final String FAILED = "failed";
-    private static final String OK = "ok";
-
-    public static Response ok(Object result){
-        return new Response(OK,result);
+    /**
+     * success
+     * @param result result
+     * @return response
+     */
+    public static Response success(Object result){
+        return new Response(true, null, result);
     }
 
-    public static Response failed(String reason){
-        return new Response(FAILED,reason);
-    }
 
-    public static Response failed(Object reason){
-        return new Response(FAILED,reason);
+    /**
+     * error
+     * @param error reason
+     * @return response
+     */
+    public static Response error(String error) {
+        return new Response(false, error, null);
     }
 }

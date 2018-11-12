@@ -15,4 +15,17 @@ public interface UserService {
      */
     MUser login(MUser user);
 
+    /**
+     *
+     * @param name name
+     * @return result
+     */
+    MUser queryByName(String name);
+
+    /**
+     * 注册
+     * @param user user
+     * @return user
+     */
+    MUser register(MUser user);
 }

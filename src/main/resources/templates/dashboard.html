@@ -10,11 +10,13 @@
     <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/static/bootstrap-3.3.7-dist/popper.min.js}"></script>
     <script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
     <!-- 此项目样式 -->
     <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/static/js/user/login.js}"></script>
+    <script th:src="@{/static/js/user/ajax.js}"></script>
+    <script th:src="@{/static/js/user/user.js}"></script>
 </head>
 <body>
 <!-- header -->
@@ -33,7 +35,7 @@
         <!-- Modal of login -->
         <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <form th:action="@{/user/login}" method="post" th:object="${user}">
+                <form th:action="@{/user/login}" method="post" th:object="${user}" id="loginForm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -54,7 +56,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="button" class="btn btn-primary" onclick="userService.login()">Login</button>
                         </div>
                     </div>
                 </form>
@@ -64,7 +66,7 @@
         <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form th:action="@{/user/register}" method="post" th:object="${user}">
+                    <form id="registerForm">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
@@ -73,14 +75,14 @@
                         <div class="modal-body">
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon">@</span>
-                                <input th:field="*{name}" type="text" class="form-control" placeholder="Username"
-                                       aria-describedby="sizing-addon1" id="register_user_name">
+                                <input type="text" class="form-control" placeholder="Username"
+                                       aria-describedby="sizing-addon1" id="register_user_name" name="name">
                             </div>
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon">_/</span>
-                                <input th:field="*{password}" type="password" class="form-control"
+                                <input type="password" class="form-control"
                                        placeholder="Password" aria-describedby="sizing-addon1"
-                                       id="register_user_password">
+                                       id="register_user_password" name="password">
                             </div>
                             <div class="input-group input-group-lg">
                                 <span class="input-group-addon">_/</span>
@@ -90,7 +92,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onsubmit="checkPassword()">Register</button>
+                            <button type="button" class="btn btn-primary" onclick="userService.register()">Register</button>
                         </div>
                     </form>
                 </div>
