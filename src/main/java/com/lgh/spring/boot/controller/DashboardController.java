@@ -1,7 +1,8 @@
-package com.lgh.spring.boot.controller.index;
+package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.service.login.UserService;
+import com.lgh.spring.boot.util.UiPath;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,6 @@ public class DashboardController {
         }
         model.addAttribute("user", mUser);
         model.addAttribute("login", login);
-        return "dashboard";
+        return UiPath.setPath(model,"dashboard",null,"/static/js/user/user.js");
     }
 }

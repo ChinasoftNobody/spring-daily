@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title,cssPaths,jsPaths)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Daily Life</title>
+    <!--<base href="<%=basePath%>">-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Daily Life</title>
+    <link rel="icon" th:href="@{/static/favicon.png}">
+    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/popper.min.js}"></script>
+    <script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <!-- 此项目公共样式及脚本 -->
+    <script th:src="@{/static/js/common/ajax.js}"></script>
+    <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
+    <!-- 子页面样式及脚本 -->
+    <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}"/>
+    <script type="text/javascript" th:each="jsPath,status:${#strings.setSplit(jsPaths,',')}" th:src="@{${jsPath}}"></script>
+</head>
+<body>
+
+</body>
+</html>

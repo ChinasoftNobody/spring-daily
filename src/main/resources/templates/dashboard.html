@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <base href="<%=basePath%>">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>Daily Life</title>
-    <link rel="icon" th:href="@{/static/favicon.png}">
-    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/static/bootstrap-3.3.7-dist/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.slim.min.js}"></script>
-    <script th:src="@{/static/bootstrap-3.3.7-dist/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/static/bootstrap-3.3.7-dist/popper.min.js}"></script>
-    <script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
-    <!-- 此项目样式 -->
-    <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/static/js/user/ajax.js}"></script>
-    <script th:src="@{/static/js/user/user.js}"></script>
-</head>
-<body>
-<!-- header -->
-<div th:include="/common/header::header"></div>
-
-<div class="app-dashboard-bg">
+<div class="app-dashboard-bg" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${session.user==null}">
         <div class="jumbotron">
             <h1>Get to start!</h1>
@@ -92,7 +68,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="userService.register()">Register</button>
+                            <button type="button" class="btn btn-primary" onclick="userService.register()">Register
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -100,10 +77,6 @@
         </div>
     </div>
     <div class="app-dashboard-container" th:if="${session.user!=null}">
-        <h1 th:text="'Hello '+${session.user.name}"></h1>
+        <div class="container" th:include="/module/index::module"></div>
     </div>
 </div>
-<!-- footer -->
-<div th:include="/common/footer::footer"></div>
-</body>
-</html>

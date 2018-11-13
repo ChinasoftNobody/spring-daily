@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.controller.index;
+package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.pojo.common.Response;
@@ -6,6 +6,7 @@ import com.lgh.spring.boot.pojo.developer.SessionUser;
 import com.lgh.spring.boot.service.login.SessionService;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.ResponseUtil;
+import com.lgh.spring.boot.util.UiPath;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -65,5 +66,10 @@ public class UserController {
         sessionService.userLogout(session);
         model.addAttribute("user", new MUser());
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/setting")
+    public String setting(Model model){
+        return UiPath.setPath(model,"/user/setting",null,"/static/js/user/user.js");
     }
 }
