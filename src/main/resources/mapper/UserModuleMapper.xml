@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgh.spring.boot.mapper.UserModuleMapper">
+    <!-- 根据用户ID查询modules -->
+    <insert id="insert" parameterType="com.lgh.spring.boot.model.MUserModule" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user_module (user_id, module_id) VALUES (#{userModule.userId},#{userModule.moduleId});
+    </insert>
+</mapper>

@@ -1,5 +1,6 @@
 package com.lgh.spring.boot.controller;
 
+import com.lgh.spring.boot.common.Const;
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.UiPath;
@@ -24,7 +25,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
-        MUser mUser = (MUser) session.getAttribute("user");
+        MUser mUser = (MUser) session.getAttribute(Const.SESSION_USER_KEY);
         Boolean login = (Boolean) session.getAttribute("login");
         if (login == null || !login) {
             mUser = new MUser();

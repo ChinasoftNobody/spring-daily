@@ -41,6 +41,40 @@ var ajaxUtil = {
     };
     $.post(option);
 },
+    ajaxGet : function ajaxGet(url, success, error) {
+        if (!error) {
+            error = function (err) {
+                console.error(err);
+            }
+        }
+        if (!success)
+        {
+            success = function (data) {
+                console.log(data)
+            }
+        }
+        var option = {
+            url:url,
+            type:'get',
+            dataType:'json',
+            contentType:"application/json",
+            cache:false,
+            async:true,
+            error: function (err) {
+                console.error(data.error);
+                error(err);
+            },
+            success:function (data) {
+                if (!data.success){
+                    console.error(data.error);
+                    error(data.error);
+                }else {
+                    success(data.result);
+                }
+            }
+        };
+        $.get(option);
+    },
 
 /**
  * ajax post form

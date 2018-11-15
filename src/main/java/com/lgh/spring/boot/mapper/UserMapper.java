@@ -11,4 +11,6 @@ public interface UserMapper {
     MUser selectByName(@Param("name") String name);
 
     boolean insert(@Param("user") MUser user);
+
+    MUser selectById(@Param("id") String id);
 }

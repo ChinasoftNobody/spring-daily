@@ -1,0 +1,2 @@
+ALTER TABLE t_user_module MODIFY COLUMN user_id INTEGER NOT NULL ;
+ALTER TABLE t_user_module MODIFY COLUMN module_id INTEGER NOT NULL ;

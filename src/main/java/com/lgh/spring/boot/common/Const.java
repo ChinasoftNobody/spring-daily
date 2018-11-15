@@ -10,4 +10,6 @@ public interface Const {
     enum EventType{
         LEARN,FAMLIY,JOB,REST,THINKING,FUNNING
     }
+
+    String SESSION_USER_KEY = "user";
 }

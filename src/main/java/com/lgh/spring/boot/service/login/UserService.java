@@ -28,4 +28,11 @@ public interface UserService {
      * @return user
      */
     MUser register(MUser user);
+
+    /**
+     * 查询
+     * @param id id
+     * @return user
+     */
+    MUser queryById(String id);
 }

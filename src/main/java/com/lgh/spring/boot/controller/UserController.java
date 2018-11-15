@@ -70,6 +70,6 @@ public class UserController {
 
     @GetMapping("/setting")
     public String setting(Model model){
-        return UiPath.setPath(model,"/user/setting",null,"/static/js/user/user.js");
+        return UiPath.setPath(model,"/user/setting",null,"/static/js/setting/setting.js");
     }
 }

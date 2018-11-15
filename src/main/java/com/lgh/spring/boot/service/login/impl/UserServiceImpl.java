@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    @Override
+    public MUser queryById(String id) {
+        return userMapper.selectById(id);
+    }
 }
