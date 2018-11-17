@@ -2,8 +2,8 @@ package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.pojo.common.Response;
-import com.lgh.spring.boot.pojo.developer.SessionUser;
-import com.lgh.spring.boot.service.login.SessionService;
+import com.lgh.spring.boot.pojo.developer.TokenUser;
+import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import com.lgh.spring.boot.util.UiPath;
@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/user")
@@ -25,20 +25,20 @@ public class UserController {
     private UserService userService;
 
     @Resource
-    private SessionService sessionService;
+    private TokenService tokenService;
 
 
     @PostMapping("/login")
     @ResponseBody
-    public Response login(@RequestBody MUser user, HttpSession session) {
-        SessionUser sessionUser = sessionService.checkLogin(session);
-        if (sessionUser != null) {
+    public Response login(@RequestBody MUser user, @RequestHeader("token") String token, HttpServletResponse response) {
+        TokenUser tokenUser = tokenService.checkLogin(token);
+        if (tokenUser != null) {
             LOG.info("无需登录");
-            return ResponseUtil.success(sessionUser);
+            return ResponseUtil.success(tokenUser);
         }
         MUser mUser = userService.login(user);
         if (mUser != null) {
-            sessionService.userLogin(session, mUser);
+            tokenService.userLogin(mUser, response);
             return ResponseUtil.success(mUser);
         } else {
             return ResponseUtil.error("登录失败");
@@ -62,8 +62,8 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(Model model, HttpSession session) {
-        sessionService.userLogout(session);
+    public String logout(Model model) {
+        tokenService.userLogout();
         model.addAttribute("user", new MUser());
         return "redirect:/dashboard";
     }

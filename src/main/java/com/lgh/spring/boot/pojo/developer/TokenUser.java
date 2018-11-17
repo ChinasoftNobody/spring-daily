@@ -2,10 +2,9 @@ package com.lgh.spring.boot.pojo.developer;
 
 import com.lgh.spring.boot.model.MUser;
 
-public class SessionUser extends MUser {
+public class TokenUser extends MUser {
     private long loginTime;
     private long expireTime;
-    private String sessionId;
 
     public long getLoginTime() {
         return loginTime;
@@ -23,11 +22,4 @@ public class SessionUser extends MUser {
         this.expireTime = expireTime;
     }
 
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
 }

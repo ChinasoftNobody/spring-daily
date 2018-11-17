@@ -2,14 +2,13 @@ package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MModule;
 import com.lgh.spring.boot.pojo.common.Response;
-import com.lgh.spring.boot.pojo.developer.SessionUser;
+import com.lgh.spring.boot.pojo.developer.TokenUser;
 import com.lgh.spring.boot.service.module.ModuleService;
 import com.lgh.spring.boot.util.ResponseUtil;
-import com.lgh.spring.boot.util.SessionUtil;
+import com.lgh.spring.boot.util.TokenUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,12 +20,12 @@ public class ModuleController {
     private ModuleService moduleService;
 
     @GetMapping("/modules")
-    public Response queryModule(HttpSession session) {
-        if (SessionUtil.validateUserLogin(session)) {
-            return ResponseUtil.error("empty session");
+    public Response queryModule(@RequestHeader("token")String token) {
+        if (TokenUtil.validateUserToken(token)) {
+            return ResponseUtil.error("token empty");
         }
-        SessionUser sessionUser = SessionUtil.getUser(session);
-        String id = sessionUser.getId();
+        TokenUser tokenUser = TokenUtil.getUser(token);
+        String id = tokenUser.getId();
         List<MModule> modules = moduleService.queryUserModules(id);
         if (modules == null) {
             modules = Collections.emptyList();
@@ -35,12 +34,12 @@ public class ModuleController {
     }
 
     @PostMapping("/add")
-    public Response addModule(@RequestBody MModule module, HttpSession session) {
-        if (SessionUtil.validateUserLogin(session)) {
+    public Response addModule(@RequestBody MModule module, @RequestHeader("token") String token) {
+        if (TokenUtil.validateUserToken(token)) {
             return ResponseUtil.error("empty session");
         }
-        SessionUser sessionUser = SessionUtil.getUser(session);
-        module = moduleService.addModule(module, sessionUser.getId());
+        TokenUser tokenUser = TokenUtil.getUser(token);
+        module = moduleService.addModule(module, tokenUser.getId());
         if (module == null)
         {
             return ResponseUtil.error("add module failed");
