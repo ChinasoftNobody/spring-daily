@@ -2,7 +2,6 @@ package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.pojo.common.Response;
-import com.lgh.spring.boot.pojo.developer.TokenUser;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.ResponseUtil;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -30,15 +30,10 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Response login(@RequestBody MUser user, @RequestHeader("token") String token, HttpServletResponse response) {
-        TokenUser tokenUser = tokenService.checkLogin(token);
-        if (tokenUser != null) {
-            LOG.info("无需登录");
-            return ResponseUtil.success(tokenUser);
-        }
+    public Response login(@RequestBody MUser user, HttpServletResponse response, HttpSession session) {
         MUser mUser = userService.login(user);
         if (mUser != null) {
-            tokenService.userLogin(mUser, response);
+            tokenService.userLogin(mUser, response, session);
             return ResponseUtil.success(mUser);
         } else {
             return ResponseUtil.error("登录失败");
@@ -62,8 +57,8 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(Model model) {
-        tokenService.userLogout();
+    public String logout(Model model, HttpSession session) {
+        tokenService.userLogout(session);
         model.addAttribute("user", new MUser());
         return "redirect:/dashboard";
     }

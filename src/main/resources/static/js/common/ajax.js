@@ -72,12 +72,12 @@ var ajaxUtil = {
                 console.error(data.error);
                 error(err);
             },
-            success: function (data) {
+            success: function (data, textStatus, request) {
                 if (!data.success) {
                     console.error(data.error);
                     error(data.error);
                 } else {
-                    success(data.result);
+                    success(data.result, textStatus, request);
                 }
             }
         }
@@ -108,11 +108,25 @@ var paramUtil = {
 };
 
 var TokenUtil = {
-    token: '',
+    tokenName:'token',
     getToken: function () {
-        return this.token;
+        return CookieUtil.get(this.tokenName);
     },
     setToken: function (token) {
-        this.token = token;
+        CookieUtil.set(this.tokenName, token);
+    }
+};
+
+var CookieUtil = {
+    get:function(name){
+        return $.cookie(name);
+    },
+    set:function (name, value, expires) {
+
+        if (!expires){
+            expires = new Date();
+            expires.setMinutes(expires.getMinutes() + 30);
+        }
+        $.cookie(name,value,{expires:expires})
     }
 };

@@ -3,9 +3,15 @@ var userService = {
     login: function () {
         var form = $('#loginForm');
         var model = $('#LoginModal');
-        ajaxUtil.ajaxPostForm('/daily/user/login', form, function (data) {
-            model.modal('toggle');
-            location.reload();
+        ajaxUtil.ajaxPostForm('/daily/user/login', form, function (data, textStatus, request) {
+            var token = request.getResponseHeader("token");
+            if(token){
+                TokenUtil.setToken(token);
+                model.modal('toggle');
+                location.reload();
+            }else {
+                console.error('login failed');
+            }
         })
     },
     register: function () {
@@ -14,5 +20,8 @@ var userService = {
         ajaxUtil.ajaxPostForm('/daily/user/register',form,function (data) {
             model.modal('toggle');
         })
+    },
+    logout: function () {
+        TokenUtil.setToken(null);
     }
 };

@@ -10,7 +10,7 @@
                     </a>
                     <ul class="dropdown-menu list-group" th:if="${session.user!=null}">
                         <a role="button" class="list-group-item" th:href="@{/user/setting}">Setting</a>
-                        <a role="button" class="list-group-item" th:href="@{/user/logout}">Logout</a>
+                        <a role="button" class="list-group-item" th:href="@{/user/logout}" onclick="userService.logout()">Logout</a>
                     </ul>
                 </li>
             </ul>

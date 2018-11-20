@@ -1,16 +1,20 @@
 package com.lgh.spring.boot.util;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
-public class DESUtil {
+public class CipherUtil {
 
     private static final String desPassword = "9588028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
 
-    public static String encode(String target) {
+    public static String desEncode(String target) {
         try {
             SecureRandom random = new SecureRandom();
             DESKeySpec desKey = new DESKeySpec(desPassword.getBytes());
@@ -30,7 +34,7 @@ public class DESUtil {
         return null;
     }
 
-    public static String decode(String target) {
+    public static String desDecode(String target) {
         try {
             // DES算法要求有一个可信任的随机数源
             SecureRandom random = new SecureRandom();
@@ -52,4 +56,32 @@ public class DESUtil {
         return null;
     }
 
+    public static String base64Encode(String target){
+        byte[] b = null;
+        String s = null;
+        try {
+            b = target.getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (b != null) {
+            s = new BASE64Encoder().encode(b).replace("\r\n","");
+        }
+        return s;
+    }
+
+    public static String base64Decode(String target) {
+        byte[] b = null;
+        String result = null;
+        if (target != null) {
+            BASE64Decoder decoder = new BASE64Decoder();
+            try {
+                b = decoder.decodeBuffer(target);
+                result = new String(b, "utf-8");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }

@@ -20,15 +20,16 @@ public class TokenUtil {
             return null;
         }
         String userStr = JSON.toJSONString(tokenUser);
-        return DESUtil.encode(userStr);
+        return CipherUtil.base64Encode(userStr);
     }
 
     public static TokenUser decodeToken(String token) {
         if (StringUtils.isEmpty(token)){
             return null;
         }
+        System.out.println(token);
         try {
-            String decode = DESUtil.decode(token);
+            String decode = CipherUtil.base64Decode(token);
             return JSON.toJavaObject(JSON.parseObject(decode), TokenUser.class);
         } catch (Exception e) {
             e.printStackTrace();
