@@ -26,7 +26,10 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return false;
             }else {
                 for (Cookie cookie:request.getCookies()){
-                    if (cookie.getName().equals("token") && (StringUtils.isEmpty(cookie.getValue())) || !TokenUtil.validateUserToken(cookie.getValue())){
+                    if (!cookie.getName().equals("token")){
+                        continue;
+                    }
+                    if (StringUtils.isEmpty(cookie.getValue()) || !TokenUtil.validateUserToken(cookie.getValue())){
                         request.getSession().removeAttribute("token");
                         request.getSession().removeAttribute(Const.SESSION_USER_KEY);
                         response.sendRedirect(request.getContextPath() + "/dashboard");

@@ -20,13 +20,8 @@ public class ModuleController {
     private ModuleService moduleService;
 
     @GetMapping("/modules")
-    public Response queryModule(@RequestHeader("token")String token) {
-        if (TokenUtil.validateUserToken(token)) {
-            return ResponseUtil.error("token empty");
-        }
-        TokenUser tokenUser = TokenUtil.getUser(token);
-        String id = tokenUser.getId();
-        List<MModule> modules = moduleService.queryUserModules(id);
+    public Response queryModule() {
+        List<MModule> modules = moduleService.queryCurrentUserModules();
         if (modules == null) {
             modules = Collections.emptyList();
         }
