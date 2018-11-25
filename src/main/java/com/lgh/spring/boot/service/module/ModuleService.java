@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.service.module;
 
 import com.lgh.spring.boot.model.MModule;
+import com.lgh.spring.boot.pojo.module.ModuleStat;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ModuleService {
      * @param id 用户ID
      * @return 添加的模块
      */
-    MModule addModule(MModule module, String id);
+    MModule addModule(MModule module, int id);
 
     /**
      * 添加当前用户模块
@@ -26,4 +27,11 @@ public interface ModuleService {
      * @return module
      */
     MModule addCurrentModule(MModule module);
+
+    /**
+     * 统计当前用户的模块信息
+     * @return 模块统计信息
+     */
+    List<ModuleStat> currentUserModuleStats();
+
 }

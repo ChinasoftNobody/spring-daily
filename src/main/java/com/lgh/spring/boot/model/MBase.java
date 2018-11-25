@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.model;
 
 public class MBase {
-    private String id;
+    private int id;
     private String createOn;
     private String updateOn;
     private boolean del;
@@ -31,11 +31,11 @@ public class MBase {
         this.del = del;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

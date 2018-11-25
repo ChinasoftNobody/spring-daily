@@ -1,0 +1,89 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="panel panel-primary" th:if="${feature!=null}">
+        <div class="panel-heading" th:text="${feature.name}"></div>
+        <div class="panel-body">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createRecordModel">新建
+                </button>
+            </div>
+            <!-- 新建model -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="createRecordModel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form th:action="@{/feature/}+${feature.id}+'/createRecord'" method="post" th:object="${record}">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">新建记录</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">名称</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{name}">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">类型</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{typeName}">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">内容</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{content}">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">备注</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{remarks}">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">持有人</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{ownerName}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <td>编号</td>
+                <td>名称</td>
+                <td>详情</td>
+                <td>备注</td>
+                <td>类型</td>
+                <td>持有人</td>
+                <td>更新时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="record,stats:${records}">
+                <td th:text="${stats.count}"></td>
+                <td th:text="${record.name}"></td>
+                <td th:text="${record.content}"></td>
+                <td th:text="${record.remarks}"></td>
+                <td th:text="${record.typeName}"></td>
+                <td th:text="${record.ownerName}"></td>
+                <td th:text="${record.updateOn}"></td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">编辑</button>
+                        <button type="button" class="btn btn-warning">删除</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="jumbotron" th:if="${feature==null}">
+        <h1>Ops, something went wrong.</h1>
+        <p>this feature not found or there is some error.</p>
+    </div>
+</div>

@@ -1,3 +1,14 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="module">
-
+    <div class="panel panel-primary" th:each="module,moduleStats:${moduleStats}">
+        <div class="panel-heading" th:text="${module.module.name}">Panel footer</div>
+        <div class="panel-body">
+            <div class="row" th:each="feature,featureStats:${module.featureStats}">
+                <div class="col-xs-6 col-md-3">
+                    <h2 th:text="${feature.feature.name}"></h2>
+                    <p th:text="${feature.feature.description}"></p>
+                    <p><a th:href="@{/feature/} + ${feature.feature.id}" role="link">more info</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

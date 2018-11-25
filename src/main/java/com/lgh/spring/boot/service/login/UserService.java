@@ -34,5 +34,5 @@ public interface UserService {
      * @param id id
      * @return user
      */
-    MUser queryById(String id);
+    MUser queryById(int id);
 }

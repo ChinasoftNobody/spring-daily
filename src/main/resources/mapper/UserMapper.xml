@@ -15,7 +15,7 @@
         INSERT INTO t_user(`name`,`password`) VALUES (#{user.name,jdbcType=VARCHAR},#{user.password,jdbcType=VARCHAR});
     </insert>
 
-    <select id="selectById" parameterType="java.lang.String" resultType="com.lgh.spring.boot.model.MUser">
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.lgh.spring.boot.model.MUser">
         SELECT * FROM t_user WHERE id = #{id};
     </select>
 </mapper>

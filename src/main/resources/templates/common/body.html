@@ -3,7 +3,7 @@
 <body th:fragment="body(path)">
 <!-- header -->
 <div th:include="/common/header::header"></div>
-<div class="container" th:replace="${path}"></div>
+<div th:replace="${path}"></div>
 
 <!-- footer -->
 <div th:include="/common/footer::footer"></div>

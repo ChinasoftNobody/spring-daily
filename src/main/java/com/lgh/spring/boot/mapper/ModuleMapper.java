@@ -12,7 +12,7 @@ public interface ModuleMapper {
      * @param userId 用户ID
      * @return 模块列表
      */
-    List<MModule> queryByUserId(@Param("userId") String userId);
+    List<MModule> queryByUserId(@Param("userId") int userId);
 
     /**
      * 新增模块

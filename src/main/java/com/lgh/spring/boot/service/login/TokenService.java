@@ -2,7 +2,7 @@ package com.lgh.spring.boot.service.login;
 
 
 import com.lgh.spring.boot.model.MUser;
-import com.lgh.spring.boot.pojo.developer.TokenUser;
+import com.lgh.spring.boot.pojo.common.TokenUser;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

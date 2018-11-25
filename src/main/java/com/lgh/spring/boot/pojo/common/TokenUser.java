@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.pojo.developer;
+package com.lgh.spring.boot.pojo.common;
 
 import com.lgh.spring.boot.model.MUser;
 

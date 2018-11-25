@@ -77,6 +77,6 @@
         </div>
     </div>
     <div class="app-dashboard-container" th:if="${session.user!=null}">
-        <div class="container" th:include="/module/index::module"></div>
+        <div th:include="/module/index::module"></div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.util;
 
 import com.alibaba.fastjson.JSON;
-import com.lgh.spring.boot.pojo.developer.TokenUser;
+import com.lgh.spring.boot.pojo.common.TokenUser;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -46,19 +46,23 @@ public class TokenUtil {
         String token;
         if (request.getHeader("X-Requested-With") == null || !request.getHeader("X-Requested-With").equals("XMLHttpRequest")){
             //non-ajax
-            token = request.getSession().getAttribute("token").toString();
-            if (StringUtils.isEmpty(token)){
-                for (Cookie cookie: request.getCookies()){
-                    if (cookie.getName().equals("token") && !StringUtils.isEmpty(cookie.getValue())){
-                        token = cookie.getValue();
-                        break;
+            Object sessionToken = request.getSession().getAttribute("token");
+            if (sessionToken != null){
+                token = sessionToken.toString();
+                if (StringUtils.isEmpty(token)){
+                    for (Cookie cookie: request.getCookies()){
+                        if (cookie.getName().equals("token") && !StringUtils.isEmpty(cookie.getValue())){
+                            token = cookie.getValue();
+                            break;
+                        }
                     }
                 }
+                if (StringUtils.isEmpty(token)) {
+                    return null;
+                }
+                return decodeToken(token);
             }
-            if (StringUtils.isEmpty(token)) {
-                return null;
-            }
-            return decodeToken(token);
+            return null;
         }else {
             //ajax
             token = request.getHeader("token");

@@ -2,23 +2,23 @@ package com.lgh.spring.boot.model;
 
 public class MUserModule extends MBase {
 
-    private String userId;
+    private int userId;
 
-    private String moduleId;
+    private int moduleId;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getModuleId() {
+    public int getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(String moduleId) {
+    public void setModuleId(int moduleId) {
         this.moduleId = moduleId;
     }
 }

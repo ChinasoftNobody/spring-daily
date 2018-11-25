@@ -2,7 +2,7 @@ package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MModule;
 import com.lgh.spring.boot.pojo.common.Response;
-import com.lgh.spring.boot.pojo.developer.TokenUser;
+import com.lgh.spring.boot.pojo.common.TokenUser;
 import com.lgh.spring.boot.service.module.ModuleService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import com.lgh.spring.boot.util.TokenUtil;

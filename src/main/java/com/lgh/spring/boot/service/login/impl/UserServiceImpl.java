@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MUser queryById(String id) {
+    public MUser queryById(int id) {
         return userMapper.selectById(id);
     }
 }

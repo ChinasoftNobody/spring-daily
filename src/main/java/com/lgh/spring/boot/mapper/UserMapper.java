@@ -12,5 +12,5 @@ public interface UserMapper {
 
     boolean insert(@Param("user") MUser user);
 
-    MUser selectById(@Param("id") String id);
+    MUser selectById(@Param("id") int id);
 }
