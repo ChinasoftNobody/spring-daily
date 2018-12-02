@@ -12,4 +12,6 @@ public interface TemplateMapper {
     boolean create(@Param("template") MTemplate template);
 
     void deleteById(@Param("templateId") int templateId);
+
+    MTemplate queryById(@Param("templateId") int templateId);
 }

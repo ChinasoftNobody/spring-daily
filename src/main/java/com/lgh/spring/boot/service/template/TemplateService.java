@@ -10,4 +10,6 @@ public interface TemplateService {
     void create(MTemplate template);
 
     void deleteById(int templateId);
+
+    MTemplate queryById(int templateId);
 }

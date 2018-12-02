@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,10 +22,19 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public void create(MTemplate template) {
-        if (StringUtils.isEmpty(template.getName())){
+        if (StringUtils.isEmpty(template.getName())) {
             return;
         }
         templateMapper.create(template);
+    }
+
+    @Override
+    public MTemplate queryById(int templateId) {
+        MTemplate mTemplate = templateMapper.queryById(templateId);
+        if (mTemplate.getProperties() == null) {
+            mTemplate.setProperties(Collections.emptyList());
+        }
+        return mTemplate;
     }
 
     @Override

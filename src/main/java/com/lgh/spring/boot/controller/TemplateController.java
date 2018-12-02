@@ -30,6 +30,16 @@ public class TemplateController {
         return UiPath.setPath(model, "/template/index");
     }
 
+    @GetMapping("/{featureId}/template/{templateId}/property")
+    public String property(@PathVariable("featureId") int featureId, @PathVariable("templateId") int templateId,
+                           Model model) {
+        MTemplate mTemplate = templateService.queryById(templateId);
+        model.addAttribute("template", mTemplate);
+        model.addAttribute("featureId", featureId);
+        model.addAttribute("templateId", templateId);
+        return UiPath.setPath(model, "/template/property");
+    }
+
     @PostMapping("/{featureId}/template/create")
     public String create(@PathVariable("featureId") int featureId, @ModelAttribute MTemplate template) {
         template.setFeatureId(featureId);

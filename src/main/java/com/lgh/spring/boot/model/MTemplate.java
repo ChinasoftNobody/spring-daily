@@ -1,5 +1,6 @@
 package com.lgh.spring.boot.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MTemplate extends MBase {
@@ -38,5 +39,12 @@ public class MTemplate extends MBase {
 
     public void setProperties(List<MTemplateProperty> properties) {
         this.properties = properties;
+    }
+
+    public void addProperty(){
+        if (properties == null){
+            properties = new ArrayList<>();
+        }
+        properties.add(new MTemplateProperty());
     }
 }
