@@ -18,4 +18,8 @@
     <select id="selectById" parameterType="java.lang.Integer" resultType="com.lgh.spring.boot.model.MUser">
         SELECT * FROM t_user WHERE id = #{id};
     </select>
+
+    <select id="selectAll" resultType="com.lgh.spring.boot.model.MUser">
+        SELECT * FROM t_user;
+    </select>
 </mapper>

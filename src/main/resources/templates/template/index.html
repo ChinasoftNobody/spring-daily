@@ -1,0 +1,125 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="panel panel-primary">
+        <div class="panel-heading">模板管理</div>
+        <div class="panel-body">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createTemplateModel">新建
+                </button>
+            </div>
+            <!-- 新建model -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="createTemplateModel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form th:action="@{/feature/}+${featureId}+'/template/create'" method="post"
+                              th:object="${template}">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">新建模板</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">名称</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:field="*{name}">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">描述</span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:field="*{description}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+        </div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <td>编号</td>
+                <td>名称</td>
+                <td>描述</td>
+                <td>更新时间</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="templateItem,stats:${templates}">
+                <td th:text="${stats.count}"></td>
+                <td th:text="${templateItem.name}"></td>
+                <td th:text="${templateItem.description}"></td>
+                <td th:text="${templateItem.updateOn}"></td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">编辑</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#propertiesSettingModal">属性配置</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#removeTemplateModal">删除
+                        </button>
+
+                        <!-- removeRecordModal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="removeTemplateModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeRecordModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/feature/}+${featureId}+'/template/'+${template.id}+'/delete'"
+                                          method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">请确认</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p th:text="'你即将删除模板：'+${templateItem.name}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">确认</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- propertiesSettingModal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="propertiesSettingModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeRecordModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/feature/}+${featureId}+'/template/'+${template.id}+'/delete'"
+                                          method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">请确认</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p th:text="'你即将删除模板：'+${templateItem.name}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">确认</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

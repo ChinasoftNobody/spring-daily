@@ -32,4 +32,8 @@
         INSERT INTO t_record (feature_id, owner_id, name, content, remarks)
         VALUES (#{record.featureId},#{record.ownerId},#{record.name},#{record.content},#{record.remarks});
     </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM t_record WHERE id=#{recordId};
+    </delete>
 </mapper>

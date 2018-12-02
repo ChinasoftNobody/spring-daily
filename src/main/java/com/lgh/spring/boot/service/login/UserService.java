@@ -2,6 +2,8 @@ package com.lgh.spring.boot.service.login;
 
 import com.lgh.spring.boot.model.MUser;
 
+import java.util.List;
+
 /**
  *
  * @author Administrator
@@ -35,4 +37,7 @@ public interface UserService {
      * @return user
      */
     MUser queryById(int id);
+
+    List<MUser> queryAll();
+
 }

@@ -5,12 +5,15 @@
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createRecordModel">新建
                 </button>
+                <a type="button" class="btn btn-default" th:text="'模板管理'"
+                   th:href="@{/feature/}+${feature.id}+'/template'"></a>
             </div>
             <!-- 新建model -->
             <div class="modal fade" tabindex="-1" role="dialog" id="createRecordModel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form th:action="@{/feature/}+${feature.id}+'/createRecord'" method="post" th:object="${record}">
+                        <form th:action="@{/feature/}+${feature.id}+'/createRecord'" method="post"
+                              th:object="${record}">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
@@ -19,23 +22,59 @@
                             <div class="modal-body">
                                 <div class="input-group">
                                     <span class="input-group-addon">名称</span>
-                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{name}">
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:field="*{name}">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">类型</span>
-                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{typeName}">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">选择
+                                            <span class="caret"></span></button>
+                                        <!-- Button and dropdown menu -->
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a role="button"
+                                                   th:onclick="|javascript:featureService.setTypeName('普通')|"
+                                                   th:text="'普通'"></a>
+                                            </li>
+                                            <li>
+                                                <a role="button"
+                                                   th:onclick="|javascript:featureService.setTypeName('其他')|"
+                                                   th:text="'其他'"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input id="typeName" type="text" class="form-control"
+                                           aria-describedby="sizing-addon2" th:field="*{typeName}">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">内容</span>
-                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{content}">
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:field="*{content}">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">备注</span>
-                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{remarks}">
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:field="*{remarks}">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">持有人</span>
-                                    <input type="text" class="form-control" aria-describedby="sizing-addon2" th:field="*{ownerName}">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">选择
+                                            <span class="caret"></span></button>
+                                        <!-- Button and dropdown menu -->
+                                        <ul class="dropdown-menu">
+                                            <li th:each="user,status:${users}">
+                                                <a role="button"
+                                                   th:onclick="|javascript:featureService.setOwnerName('${user.name}')|"
+                                                   th:text="${user.name}"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input th:id="ownerName" type="text" class="form-control" readonly="readonly"
+                                           th:field="*{ownerName}">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -74,7 +113,35 @@
                 <td>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-primary">编辑</button>
-                        <button type="button" class="btn btn-warning">删除</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#removeRecordModal">删除
+                        </button>
+
+                        <!-- removeRecordModal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeRecordModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/feature/}+${feature.id}+'/deleteRecord/'+${record.id}"
+                                          method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">请确认</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p th:text="'你即将删除记录：'+${record.name}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">确认</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>

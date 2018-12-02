@@ -20,7 +20,7 @@
     <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
     <!-- 子页面样式及脚本 -->
     <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}"/>
-    <script th:inline="javascript" type="text/javascript" th:each="jsPath,status:${#strings.setSplit(jsPaths,',')}" th:src="@{${jsPath}}"></script>
+    <script th:inline="javascript" th:each="jsPath,status:${#strings.setSplit(jsPaths,',')}" th:src="@{${jsPath}}"></script>
 </head>
 <body>
 

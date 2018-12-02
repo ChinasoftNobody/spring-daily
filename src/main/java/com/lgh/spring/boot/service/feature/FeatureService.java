@@ -33,4 +33,6 @@ public interface FeatureService {
      * @param record record
      */
     void createRecord(int featureId, Record record);
+
+    boolean deleteRecord(int recordId);
 }

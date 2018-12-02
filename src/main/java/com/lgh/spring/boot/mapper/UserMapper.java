@@ -3,6 +3,8 @@ package com.lgh.spring.boot.mapper;
 import com.lgh.spring.boot.model.MUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
     MUser first();
 
@@ -13,4 +15,6 @@ public interface UserMapper {
     boolean insert(@Param("user") MUser user);
 
     MUser selectById(@Param("id") int id);
+
+    List<MUser> selectAll();
 }

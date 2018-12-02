@@ -20,4 +20,6 @@ public interface RecordMapper {
      * @return 结果
      */
     boolean create(@Param("record") MRecord mRecord);
+
+    boolean deleteById(@Param("recordId") int recordId);
 }
