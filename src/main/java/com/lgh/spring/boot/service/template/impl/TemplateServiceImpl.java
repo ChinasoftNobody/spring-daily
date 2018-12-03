@@ -1,7 +1,9 @@
 package com.lgh.spring.boot.service.template.impl;
 
 import com.lgh.spring.boot.mapper.TemplateMapper;
+import com.lgh.spring.boot.mapper.TemplatePropertyMapper;
 import com.lgh.spring.boot.model.MTemplate;
+import com.lgh.spring.boot.model.MTemplateProperty;
 import com.lgh.spring.boot.service.template.TemplateService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -14,6 +16,9 @@ import java.util.List;
 public class TemplateServiceImpl implements TemplateService {
     @Resource
     private TemplateMapper templateMapper;
+
+    @Resource
+    private TemplatePropertyMapper templatePropertyMapper;
 
     @Override
     public List<MTemplate> queryByFeatureId(int featureId) {
@@ -40,5 +45,17 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public void deleteById(int templateId) {
         templateMapper.deleteById(templateId);
+    }
+
+    @Override
+    public void createProperty(int featureId, int templateId, MTemplateProperty property) {
+        property.setFeatureId(featureId);
+        property.setTemplateId(templateId);
+        templatePropertyMapper.create(property);
+    }
+
+    @Override
+    public void deleteProperty(int propertyId) {
+        templatePropertyMapper.deleteById(propertyId);
     }
 }

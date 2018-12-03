@@ -7,6 +7,7 @@ public class MTemplateProperty extends MBase{
     private String type;
     private Object defaultValue;
     private Object value;
+    private String description;
 
     public String getName() {
         return name;
@@ -54,5 +55,13 @@ public class MTemplateProperty extends MBase{
 
     public void setFeatureId(int featureId) {
         this.featureId = featureId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

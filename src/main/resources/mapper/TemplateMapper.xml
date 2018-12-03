@@ -38,14 +38,14 @@
             ttp.del AS propertyDel,
             ttp.createOn AS propertyCreateOn,
             ttp.updateOn AS propertyUpdateOn,
-            ttp.tmplate_id AS propertyTemplateId,
+            ttp.template_id AS propertyTemplateId,
             ttp.feature_id AS propertyFeatureId,
             ttp.name AS propertyName,
             ttp.type AS propertyType,
             ttp.description AS propertyDescription,
             ttp.default_value AS propertyDefaultValue,
             ttp.value AS propertyValue
-        FROM t_template tt LEFT JOIN t_template_property ttp ON tt.id = ttp.tmplate_id
+        FROM t_template tt LEFT JOIN t_template_property ttp ON tt.id = ttp.template_id
         ORDER BY tt.createOn DESC;
     </select>
 
@@ -67,14 +67,14 @@
             ttp.del AS propertyDel,
             ttp.createOn AS propertyCreateOn,
             ttp.updateOn AS propertyUpdateOn,
-            ttp.tmplate_id AS propertyTemplateId,
+            ttp.template_id AS propertyTemplateId,
             ttp.feature_id AS propertyFeatureId,
             ttp.name AS propertyName,
             ttp.type AS propertyType,
             ttp.description AS propertyDescription,
             ttp.default_value AS propertyDefaultValue,
             ttp.value AS propertyValue
-        FROM t_template tt LEFT JOIN t_template_property ttp ON tt.id = ttp.tmplate_id
+        FROM t_template tt LEFT JOIN t_template_property ttp ON tt.id = ttp.template_id
         WHERE tt.id = #{templateId};
     </select>
 </mapper>

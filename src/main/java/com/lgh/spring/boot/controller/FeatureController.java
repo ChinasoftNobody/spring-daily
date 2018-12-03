@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MFeature;
+import com.lgh.spring.boot.model.MRecord;
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.pojo.feature.Record;
 import com.lgh.spring.boot.service.feature.FeatureService;
@@ -32,7 +33,7 @@ public class FeatureController {
         MFeature feature = featureService.queryById(featureId);
         if (feature != null) {
             model.addAttribute("feature", feature);
-            List<Record> records = featureService.records(featureId);
+            List<MRecord> records = featureService.records(featureId);
             if (records != null && !records.isEmpty()) {
                 model.addAttribute("records", records);
             }

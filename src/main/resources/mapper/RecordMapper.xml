@@ -4,36 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lgh.spring.boot.mapper.RecordMapper">
     <resultMap id="base" type="com.lgh.spring.boot.model.MBase">
-        <id column="id" property="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="createOn" property="createOn" javaType="java.lang.String" jdbcType="DATE"/>
-        <result column="updateOn" property="updateOn" javaType="java.lang.String" jdbcType="DATE"/>
-        <result column="del" property="del" javaType="java.lang.Boolean" jdbcType="TINYINT"/>
+        <id column="id" property="id"/>
+        <result property="del" column="del"/>
+        <result column="updateOn" property="updateOn"/>
+        <result column="createOn" property="createOn"/>
     </resultMap>
-    <resultMap id="mRecord" type="com.lgh.spring.boot.model.MRecord" extends="base">
-        <result column="owner_id" property="ownerId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="feature_id" property="featureId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="type" property="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="content" property="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="remarks" property="remarks" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <resultMap id="recordResultMap" type="com.lgh.spring.boot.model.MRecord" extends="base">
+        <result property="templateId" column="template_id"/>
+        <collection property="properties" resultMap="recordPropResultMap"/>
     </resultMap>
-    <resultMap id="record" type="com.lgh.spring.boot.pojo.feature.Record" extends="mRecord">
-        <result column="ownerName" property="ownerName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="typeName" property="typeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <resultMap id="recordPropResultMap" type="com.lgh.spring.boot.model.MRecordProperty">
+        <id property="id" column="propId"/>
+        <result property="recordId" column="record_id"/>
+        <result property="value" column="value"/>
+        <result property="key" column="key"/>
+        <result property="templatePropertyId" column="templatePropertyId"/>
     </resultMap>
 
-    <select id="queryByFeatureId" parameterType="java.lang.Integer" resultMap="record">
-        SELECT tr.id ,tr.name, tr.feature_id,tr.owner_id,tr.content,tr.remarks,tr.createOn,tr.updateOn,tr.del,tr.type,
-            tu.name AS ownerName, CASE tr.type WHEN 0 THEN '普通' ELSE '其他' END AS typeName
-        FROM t_record tr LEFT JOIN t_user tu ON tr.owner_id = tu.id WHERE tr.feature_id = #{featureId};
+    <select id="queryByTemplateId" parameterType="java.lang.Integer" resultMap="recordResultMap">
+        SELECT tr.*,
+            trp.id AS propId,
+            trp.record_id,trp.value,trp.del,trp.createOn,trp.updateOn,
+            ttp.id AS templatePropertyId,
+            ttp.value AS `key`
+        FROM t_record tr
+            LEFT JOIN t_record_property trp ON tr.id=trp.record_id
+            LEFT JOIN t_template_property ttp ON trp.template_property_id = ttp.id
+        WHERE tr.template_id=#{templateId};
     </select>
-
-    <insert id="create" parameterType="com.lgh.spring.boot.model.MRecord" useGeneratedKeys="true" keyProperty="record.id">
-        INSERT INTO t_record (feature_id, owner_id, name, content, remarks)
-        VALUES (#{record.featureId},#{record.ownerId},#{record.name},#{record.content},#{record.remarks});
-    </insert>
-
-    <delete id="deleteById" parameterType="java.lang.Integer">
-        DELETE FROM t_record WHERE id=#{recordId};
-    </delete>
 </mapper>

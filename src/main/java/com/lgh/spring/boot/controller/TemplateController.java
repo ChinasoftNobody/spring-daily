@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MTemplate;
+import com.lgh.spring.boot.model.MTemplateProperty;
 import com.lgh.spring.boot.service.template.TemplateService;
 import com.lgh.spring.boot.util.UiPath;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,22 @@ public class TemplateController {
         model.addAttribute("template", mTemplate);
         model.addAttribute("featureId", featureId);
         model.addAttribute("templateId", templateId);
+        model.addAttribute("property", new MTemplateProperty());
         return UiPath.setPath(model, "/template/property");
+    }
+
+    @PostMapping("/{featureId}/template/{templateId}/property/create")
+    public String createProperty(@PathVariable int featureId, @PathVariable int templateId,
+                                 @ModelAttribute MTemplateProperty property) {
+        templateService.createProperty(featureId, templateId, property);
+        return "redirect:/feature/" + featureId + "/template/" + templateId + "/property";
+    }
+
+    @PostMapping("/{featureId}/template/{templateId}/property/{propertyId}/delete")
+    public String deleteProperty(@PathVariable int featureId, @PathVariable int templateId,
+                                 @PathVariable int propertyId) {
+        templateService.deleteProperty(propertyId);
+        return "redirect:/feature/" + featureId + "/template/" + templateId + "/property";
     }
 
     @PostMapping("/{featureId}/template/create")

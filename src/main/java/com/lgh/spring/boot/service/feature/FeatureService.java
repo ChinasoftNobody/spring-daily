@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.service.feature;
 
 import com.lgh.spring.boot.model.MFeature;
+import com.lgh.spring.boot.model.MRecord;
 import com.lgh.spring.boot.pojo.feature.Record;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface FeatureService {
      * @param featureId featureId
      * @return result
      */
-    List<Record> records(int featureId);
+    List<MRecord> records(int featureId);
 
     /**
      * 创建记录

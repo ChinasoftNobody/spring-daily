@@ -1,24 +1,35 @@
 package com.lgh.spring.boot.pojo.feature;
 
-import com.lgh.spring.boot.model.MRecord;
+import com.lgh.spring.boot.model.MRecordProperty;
 
-public class Record extends MRecord{
-    private String ownerName;
-    private String typeName;
+import java.util.List;
 
-    public String getOwnerName() {
-        return ownerName;
+public class Record{
+    private List<MRecordProperty> recordProperties;
+    private String createOn;
+    private String updateOn;
+
+    public String getCreateOn() {
+        return createOn;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setCreateOn(String createOn) {
+        this.createOn = createOn;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getUpdateOn() {
+        return updateOn;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setUpdateOn(String updateOn) {
+        this.updateOn = updateOn;
+    }
+
+    public List<MRecordProperty> getRecordProperties() {
+        return recordProperties;
+    }
+
+    public void setRecordProperties(List<MRecordProperty> recordProperties) {
+        this.recordProperties = recordProperties;
     }
 }
