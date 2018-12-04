@@ -5,7 +5,7 @@ package com.lgh.spring.boot.model;
  */
 public class MRecordProperty extends MBase {
     private int recordId;
-    private String templatePropertyId;
+    private int templatePropertyId;
     private String key;
     private String value;
 
@@ -25,11 +25,11 @@ public class MRecordProperty extends MBase {
         this.recordId = recordId;
     }
 
-    public String getTemplatePropertyId() {
+    public int getTemplatePropertyId() {
         return templatePropertyId;
     }
 
-    public void setTemplatePropertyId(String templatePropertyId) {
+    public void setTemplatePropertyId(int templatePropertyId) {
         this.templatePropertyId = templatePropertyId;
     }
 

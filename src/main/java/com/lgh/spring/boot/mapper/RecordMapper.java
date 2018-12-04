@@ -13,9 +13,11 @@ public interface RecordMapper {
      * @param mRecord 记录信息
      * @return 结果
      */
-    boolean create(@Param("record") MRecordProperty mRecord);
+    boolean create(@Param("record") MRecord mRecord);
 
     boolean deleteById(@Param("recordId") int recordId);
 
     List<MRecord> queryByTemplateId(@Param("templateId") int templateId);
+
+    boolean createProperties(List<MRecordProperty> properties);
 }

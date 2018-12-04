@@ -2,10 +2,11 @@ package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.model.MFeature;
 import com.lgh.spring.boot.model.MRecord;
+import com.lgh.spring.boot.model.MTemplate;
 import com.lgh.spring.boot.model.MUser;
-import com.lgh.spring.boot.pojo.feature.Record;
 import com.lgh.spring.boot.service.feature.FeatureService;
 import com.lgh.spring.boot.service.login.UserService;
+import com.lgh.spring.boot.service.template.TemplateService;
 import com.lgh.spring.boot.util.UiPath;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -24,6 +26,8 @@ public class FeatureController {
 
     @Resource
     private FeatureService featureService;
+    @Resource
+    private TemplateService templateService;
 
     @Resource
     private UserService userService;
@@ -42,13 +46,17 @@ public class FeatureController {
         if (users == null) {
             users = Collections.emptyList();
         }
+        List<MTemplate> templates = templateService.queryByFeatureId(featureId);
+        if (templates != null && !templates.isEmpty())
+        {
+            model.addAttribute("template", templates.get(0));
+        }
         model.addAttribute("users", users);
-        model.addAttribute("record", new Record());
         return UiPath.setPath(model, "/feature/index", null, "/static/js/feature/index.js");
     }
 
     @PostMapping("/{featureId}/createRecord")
-    public String createRecord(@PathVariable int featureId, @ModelAttribute Record record) {
+    public String createRecord(@PathVariable int featureId, @RequestParam HashMap<String, String> record) {
         featureService.createRecord(featureId, record);
         return "redirect:/feature/" + featureId;
     }

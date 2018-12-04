@@ -32,4 +32,14 @@
             LEFT JOIN t_template_property ttp ON trp.template_property_id = ttp.id
         WHERE tr.template_id=#{templateId};
     </select>
+
+    <insert id="create" parameterType="com.lgh.spring.boot.model.MRecord" useGeneratedKeys="true" keyProperty="record.id">
+        INSERT INTO t_record(template_id)VALUES (#{record.templateId});
+    </insert>
+    <insert id="createProperties" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_record_property(record_id, template_property_id, value) VALUES
+            <foreach collection="list" separator="," item="item">
+                (#{item.recordId},#{item.templatePropertyId},#{item.value})
+            </foreach>
+    </insert>
 </mapper>

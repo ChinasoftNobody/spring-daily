@@ -3,15 +3,15 @@ package com.lgh.spring.boot.model;
 import java.util.List;
 
 public class MRecord extends MBase {
-    private String templateId;
+    private int templateId;
 
     private List<MRecordProperty> properties;
 
-    public String getTemplateId() {
+    public int getTemplateId() {
         return templateId;
     }
 
-    public void setTemplateId(String templateId) {
+    public void setTemplateId(int templateId) {
         this.templateId = templateId;
     }
 

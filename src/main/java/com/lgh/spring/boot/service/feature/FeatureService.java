@@ -2,8 +2,8 @@ package com.lgh.spring.boot.service.feature;
 
 import com.lgh.spring.boot.model.MFeature;
 import com.lgh.spring.boot.model.MRecord;
-import com.lgh.spring.boot.pojo.feature.Record;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface FeatureService {
@@ -33,7 +33,7 @@ public interface FeatureService {
      * @param featureId featureId
      * @param record record
      */
-    void createRecord(int featureId, Record record);
+    void createRecord(int featureId, HashMap<String, String> record);
 
     boolean deleteRecord(int recordId);
 }

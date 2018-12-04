@@ -20,7 +20,11 @@
                                 <h4 class="modal-title">新建记录</h4>
                             </div>
                             <div class="modal-body">
-
+                                <div class="input-group" th:each="prop,propStatus:${template.properties}">
+                                    <span class="input-group-addon" th:text="${prop.name}"></span>
+                                    <input type="text" class="form-control" aria-describedby="sizing-addon2"
+                                           th:name="${prop.name}">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -32,65 +36,54 @@
             </div><!-- /.modal -->
 
         </div>
-        <h1 th:text="'aa'+${records}"></h1>
         <!-- Table -->
         <table class="table">
             <thead>
             <tr>
                 <td>编号</td>
-                <td>名称</td>
-                <td>详情</td>
-                <td>备注</td>
-                <td>类型</td>
-                <td>持有人</td>
-                <td>更新时间</td>
+                <td th:each="prop,props:${template.properties}" th:text="${prop.name}"></td>
                 <td>操作</td>
             </tr>
             </thead>
             <tbody>
-            <!--<tr th:each="recordItem,stats:${records}">-->
-                <!--<td th:text="${stats.count}"></td>-->
-                <!--<td th:text="${recordItem.name}"></td>-->
-                <!--<td th:text="${recordItem.content}"></td>-->
-                <!--<td th:text="${recordItem.remarks}"></td>-->
-                <!--<td th:text="${recordItem.typeName}"></td>-->
-                <!--<td th:text="${recordItem.ownerName}"></td>-->
-                <!--<td th:text="${recordItem.updateOn}"></td>-->
-                <!--<td>-->
-                    <!--<div class="btn-group" role="group">-->
-                        <!--<button type="button" class="btn btn-primary">编辑</button>-->
-                        <!--<button type="button" class="btn btn-warning" data-toggle="modal"-->
-                                <!--data-target="#removeRecordModal">删除-->
-                        <!--</button>-->
+            <tr th:each="recordItem,stats:${records}">
+                <td th:text="${stats.count}"></td>
+                <td th:each="item,items:${recordItem.properties}" th:text="${item.value}"></td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">编辑</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#removeRecordModal">删除
+                        </button>
 
-                        <!--&lt;!&ndash; removeRecordModal &ndash;&gt;-->
-                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
-                        <!--<div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"-->
-                             <!--aria-labelledby="removeRecordModal">-->
-                            <!--<div class="modal-dialog" role="document">-->
-                                <!--<div class="modal-content">-->
-                                    <!--<form th:action="@{/feature/}+${feature.id}+'/deleteRecord/'+${recordItem.id}"-->
-                                          <!--method="post">-->
-                                        <!--<div class="modal-header">-->
-                                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                                                <!--<span aria-hidden="true">&times;</span></button>-->
-                                            <!--<h4 class="modal-title" id="myModalLabel">请确认</h4>-->
-                                        <!--</div>-->
-                                        <!--<div class="modal-body">-->
-                                            <!--<p th:text="'你即将删除记录：'+${recordItem.name}"></p>-->
-                                        <!--</div>-->
-                                        <!--<div class="modal-footer">-->
-                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消-->
-                                            <!--</button>-->
-                                            <!--<button type="submit" class="btn btn-primary">确认</button>-->
-                                        <!--</div>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</td>-->
-            <!--</tr>-->
+                        <!-- removeRecordModal -->
+                        <!-- Modal -->
+                        <!--<div class="modal fade" id="removeRecordModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeRecordModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form th:action="@{/feature/}+${feature.id}+'/deleteRecord/'+${recordItem.id}"
+                                          method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">请确认</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p th:text="'你即将删除记录：'+${recordItem.name}"></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">确认</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
