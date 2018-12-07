@@ -1,13 +1,10 @@
 package com.lgh.spring.boot.controller;
 
-import com.lgh.spring.boot.model.MModule;
 import com.lgh.spring.boot.model.MUser;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;
-import com.lgh.spring.boot.service.module.ModuleService;
 import com.lgh.spring.boot.util.ResponseUtil;
-import com.lgh.spring.boot.util.UiPath;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -31,8 +26,6 @@ public class UserController {
     @Resource
     private TokenService tokenService;
 
-    @Resource
-    private ModuleService moduleService;
 
 
     @PostMapping("/login")
@@ -68,27 +61,5 @@ public class UserController {
         tokenService.userLogout(session);
         model.addAttribute("user", new MUser());
         return "redirect:/dashboard";
-    }
-
-    @GetMapping("/setting")
-    public String setting(Model model){
-        List<MModule> modules = moduleService.queryCurrentUserModules();
-        if (modules == null) {
-            modules = Collections.emptyList();
-        }
-        model.addAttribute("modules", modules);
-        model.addAttribute("currentModule", new MModule());
-        return UiPath.setPath(model,"/user/setting",null,"/static/js/setting/setting.js");
-    }
-
-    @PostMapping("/module/add")
-    public String addModule(@ModelAttribute MModule currentModule, Model model){
-        if (currentModule == null){
-            currentModule = new MModule();
-        }else {
-            moduleService.addCurrentModule(currentModule);
-        }
-        model.addAttribute("currentModule", currentModule);
-        return "redirect:/user/setting";
     }
 }

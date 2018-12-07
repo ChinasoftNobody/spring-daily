@@ -4,22 +4,22 @@ package com.lgh.spring.boot.common;
  * Created by Administrator on 2017/3/4.
  */
 public class PageQuery{
-    private int pageNumber;
-    private int pageSize;
+    private int page;
+    private int size;
 
-    public int getPageNumber() {
-        return pageNumber;
+    public int getPage() {
+        return page;
     }
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public int getSize() {
+        return size;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setSize(int size) {
+        this.size = size;
     }
 }
