@@ -20,6 +20,6 @@
     </select>
 
     <select id="selectAll" resultType="com.lgh.spring.boot.model.MUser">
-        SELECT * FROM t_user;
+        SELECT * FROM t_user
     </select>
 </mapper>
