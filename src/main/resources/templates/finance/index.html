@@ -2,7 +2,10 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <button class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建
+                <button class="btn btn-primary"
+                        aria-haspopup="true" aria-expanded="false"
+                        data-toggle="modal" data-target="#CreateRecordModal"><span
+                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建
                 </button>
             </div>
             <div class="panel-body">
@@ -28,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="record,status:${recordPage.result}" th:class="${status.count%2==1?'grave':''}">
+                    <tr th:each="record,status:${recordPage.result}">
                         <td th:text="${status.count}"></td>
                         <td th:text="${record.subject}"></td>
                         <td th:text="${record.type}"></td>
@@ -42,6 +45,74 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal of CreateRecord -->
+    <div class="modal fade" id="CreateRecordModal" tabindex="-1" role="dialog" aria-labelledby="CreateRecordModal">
+        <div class="modal-dialog" role="document">
+            <form th:action="@{/user/login}" method="post" id="CreateRecordForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">新建记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">主题</span>
+                            <input type="text" class="form-control" placeholder="主题"
+                                   aria-describedby="sizing-addon1" name="subject">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">类型</span>
+                            <div class="dropdown">
+                                <input class="btn btn-default dropdown-toggle" type="button"
+                                       id="typeDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="true" value="支出" name="type">
+                                <ul class="dropdown-menu" aria-labelledby="typeDropdownMenu">
+                                    <li><a onclick="javascript:$('#typeDropdownMenu').val('支出')">支出</a></li>
+                                    <li><a onclick="javascript:$('#typeDropdownMenu').val('收入')">收入</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">金额</span>
+                            <input type="number" class="form-control" placeholder="金额"
+                                   aria-describedby="sizing-addon1" name="amount">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">备注</span>
+                            <input type="text" class="form-control" placeholder="备注"
+                                   aria-describedby="sizing-addon1" name="remarks">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">发生时间</span>
+                            <input type="datetime-local" class="form-control" placeholder="发生时间"
+                                   aria-describedby="sizing-addon1" name="occurrenceTime">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">发生人</span>
+                            <div class="dropdown">
+                                <input hidden="hidden" name="occurrenceMember.id" id="occurrenceMemberId">
+                                <input class="btn btn-default dropdown-toggle" type="button"
+                                       id="occurrenceMemberName" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="true" value="点我选择" name="occurrenceMember.name">
+                                <ul class="dropdown-menu" aria-labelledby="typeDropdownMenu">
+                                    <li th:each="user,status:${users}">
+                                        <a th:onclick="${'javascript:FinancialService.chooseOccurrenceMember('+user.id+','''+user.name+''')'}"
+                                           th:text="${user.name}"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="FinancialService.createRecord()">确认
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
