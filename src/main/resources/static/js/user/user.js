@@ -22,6 +22,11 @@ var userService = {
         })
     },
     logout: function () {
-        TokenUtil.setToken(null);
+        TokenUtil.removeToken();
     }
 };
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
+});

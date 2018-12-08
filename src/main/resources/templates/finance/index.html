@@ -1,0 +1,47 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建
+                </button>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>主题</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>备注</th>
+                        <th>发生时间</th>
+                        <th>发生人</th>
+                        <th>入库时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="record,status:${recordPage.result}" th:class="${status.count%2==1?'grave':''}">
+                        <td th:text="${status.count}"></td>
+                        <td th:text="${record.subject}"></td>
+                        <td th:text="${record.type}"></td>
+                        <td th:text="${record.amount}"></td>
+                        <td th:text="${record.remarks}"></td>
+                        <td th:text="${record.occurrenceTime}"></td>
+                        <td th:text="${record.occurrenceMember.name}"></td>
+                        <td th:text="${record.updateOn}"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

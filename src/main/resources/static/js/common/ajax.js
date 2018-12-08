@@ -114,6 +114,9 @@ var TokenUtil = {
     },
     setToken: function (token) {
         CookieUtil.set(this.tokenName, token);
+    },
+    removeToken: function () {
+        CookieUtil.remove(this.tokenName);
     }
 };
 
@@ -128,5 +131,8 @@ var CookieUtil = {
             expires.setMinutes(expires.getMinutes() + 30);
         }
         $.cookie(name,value,{expires:expires})
+    },
+    remove: function (key) {
+        $.removeCookie(key);
     }
 };

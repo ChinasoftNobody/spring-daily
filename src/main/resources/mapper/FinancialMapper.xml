@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgh.spring.boot.mapper.FinancialMapper">
+    <resultMap id="base" type="com.lgh.spring.boot.model.MBase">
+        <id column="id" property="id"/>
+        <result column="del" property="del"/>
+        <result column="createOn" property="createOn"/>
+        <result column="updateOn" property="updateOn"/>
+    </resultMap>
+    <resultMap id="userResultMap" type="com.lgh.spring.boot.model.MUser">
+        <id column="userId" property="id"/>
+        <result column="userName" property="name"/>
+        <result column="userPassword" property="password"/>
+        <result column="userDel" property="del"/>
+        <result column="userCreateOn" property="createOn"/>
+        <result column="userUpdateOn" property="updateOn"/>
+    </resultMap>
+    <resultMap id="recordWithUserMap" type="com.lgh.spring.boot.model.MRecord" extends="base">
+        <result column="subject" property="subject"/>
+        <result column="type" property="type"/>
+        <result column="amount" property="amount"/>
+        <result column="remarks" property="remarks"/>
+        <result column="occurrence_time" property="occurrenceTime"/>
+        <association property="occurrenceMember" resultMap="userResultMap"/>
+    </resultMap>
+    <sql id="recordWithUserQuerySql">
+        tr.*,
+        tu.id as userId,
+        tu.name as userName,
+        tu.password as userPassword,
+        tu.del as userDel,
+        tu.createOn as userCreateOn,
+        tu.updateOn as userUpdateOn
+    </sql>
+    <select id="queryAll" resultMap="recordWithUserMap">
+        SELECT <include refid="recordWithUserQuerySql"/> FROM t_record tr LEFT JOIN t_user tu ON tr.occurrence_member=tu.id
+    </select>
+</mapper>

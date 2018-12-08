@@ -1,2 +1,4 @@
 .app-header{font-size: 16pt; line-height: 2em;color: black;}
 .app-footer{background: black;font-size: 12pt;color:white;line-height: 2em;}
+.grave{background: gainsboro;}
+.grave:hover{background: lavender;}

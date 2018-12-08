@@ -28,6 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         addInterceptor.excludePathPatterns("/error");
         addInterceptor.excludePathPatterns("/dashboard");
         addInterceptor.excludePathPatterns("/user/login");
+        addInterceptor.excludePathPatterns("/user/logout");
         addInterceptor.excludePathPatterns("/user/register");
         // 拦截配置
         addInterceptor.addPathPatterns("/**");
