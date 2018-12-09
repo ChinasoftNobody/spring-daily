@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lgh.spring.boot.mapper.FinancialMapper;
 import com.lgh.spring.boot.model.MRecord;
+import com.lgh.spring.boot.pojo.finance.RecordQuery;
 import com.lgh.spring.boot.service.financial.FinancialService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,19 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Override
     public Page<MRecord> queryAll() {
-        Page<MRecord> page = PageHelper.startPage(1, 20, true);
+        Page<MRecord> page = PageHelper.startPage(1, 10, true);
+        List<MRecord> records = financialMapper.queryAll();
+        return page;
+    }
+
+    @Override
+    public void addRecord(MRecord record) {
+        financialMapper.insert(record);
+    }
+
+    @Override
+    public Page<MRecord> queryByFilter(RecordQuery query) {
+        Page<MRecord> page = PageHelper.startPage(query.getPage(),query.getSize(),true);
         List<MRecord> records = financialMapper.queryAll();
         return page;
     }

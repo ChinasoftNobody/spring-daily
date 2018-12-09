@@ -2,6 +2,7 @@ package com.lgh.spring.boot.service.financial;
 
 import com.github.pagehelper.Page;
 import com.lgh.spring.boot.model.MRecord;
+import com.lgh.spring.boot.pojo.finance.RecordQuery;
 
 public interface FinancialService {
 
@@ -11,4 +12,7 @@ public interface FinancialService {
      */
     Page<MRecord> queryAll();
 
+    void addRecord(MRecord record);
+
+    Page<MRecord> queryByFilter(RecordQuery query);
 }

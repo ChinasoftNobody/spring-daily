@@ -16,7 +16,7 @@
     <script th:src="@{/static/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
     <script th:src="@{/static/js/common/jquery.cookie.js}"></script>
     <!-- 此项目公共样式及脚本 -->
-    <script th:src="@{/static/js/common/ajax.js}"></script>
+    <script th:inline="javascript" th:src="@{/static/js/common/util.js}" language="javascript"></script>
     <link th:href="@{/static/index.css}" rel="stylesheet" type="text/css">
     <!-- 子页面样式及脚本 -->
     <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}"/>
