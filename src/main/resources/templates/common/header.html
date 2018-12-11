@@ -1,41 +1,68 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
-    <nav class="app-header navbar navbar-default">
-        <div class="container">
-            <ul class="nav nav-tabs" style="border: none;">
-                <li role="presentation" class="text">
-                    <a class="app-header" role="menuitem" th:href="@{/dashboard}"><span class="glyphicon glyphicon-home"
-                                                                                        aria-hidden="true"></span>主页</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/dashboard}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li role="presentation" class="text">
-                    <a class="app-header" role="button" data-toggle="collapse"
-                       data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu"><span
-                            class="glyphicon glyphicon-th-list"
-                            aria-hidden="true"></span>功能</a></li>
-                <li role="presentation" class="navbar-right dropdown" style="margin-right: 0;">
-                    <span th:if="${session.user==null}">
-                        <a class="dropdown-toggle" href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"
-                           data-toggle="modal" data-target="#LoginModal">登陆
-                        </a>
-                        <span>/</span>
-                        <a class="dropdown-toggle" href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"
-                           data-toggle="modal" data-target="#RegisterModal">注册
-                        </a>
-                    </span>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                       aria-expanded="false"
-                       th:if="${session.user!=null}"
-                       th:utext="${session.user.name} + '&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;'"></a>
-                    <ul class="dropdown-menu list-group" th:if="${session.user!=null}">
-                        <a role="button" class="list-group-item" th:href="@{/user/logout}"
-                           onclick="userService.logout()">注销</a>
-                    </ul>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>-->
+                <li class="nav-item">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseMenu"
+                            aria-expanded="false" aria-controls="collapseMenu">
+                        More
+                    </button>
                 </li>
-            </ul>
-        </div>
 
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
     </nav>
+
+
+    <!--<div class="container">
+        <ul class="nav nav-tabs" style="border: none;">
+            <li role="presentation" class="text">
+                <a class="app-header" role="menuitem" th:href="@{/dashboard}"><span class="glyphicon glyphicon-home"
+                                                                                    aria-hidden="true"></span>主页</a>
+            </li>
+            <li role="presentation" class="text">
+                <a class="app-header" role="button" data-toggle="collapse"
+                   data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu"><span
+                        class="glyphicon glyphicon-th-list"
+                        aria-hidden="true"></span>功能</a></li>
+            <li role="presentation" class="navbar-right dropdown" style="margin-right: 0;">
+                <span th:if="${session.user==null}">
+                    <a class="dropdown-toggle" href="#" role="button" aria-haspopup="true"
+                       aria-expanded="false"
+                       data-toggle="modal" data-target="#LoginModal">登陆
+                    </a>
+                    <span>/</span>
+                    <a class="dropdown-toggle" href="#" role="button" aria-haspopup="true"
+                       aria-expanded="false"
+                       data-toggle="modal" data-target="#RegisterModal">注册
+                    </a>
+                </span>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"
+                   th:if="${session.user!=null}"
+                   th:utext="${session.user.name} + '&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;'"></a>
+                <ul class="dropdown-menu list-group" th:if="${session.user!=null}">
+                    <a role="button" class="list-group-item" th:href="@{/user/logout}"
+                       onclick="userService.logout()">注销</a>
+                </ul>
+            </li>
+        </ul>
+    </div>-->
     <!-- Modal of login -->
     <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -107,8 +134,8 @@
     <div class="collapse" id="collapseMenu">
         <div class="well">
             <div class="container">
-                <ul class="nav nav-pills">
-                    <li role="presentation"><a role="menuitem" th:href="@{/finance}">财务管理</a></li>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/finance}">财务管理</a></li>
                 </ul>
             </div>
         </div>
