@@ -5,6 +5,7 @@ import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.ResponseUtil;
+import com.lgh.spring.boot.util.UiPath;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,10 @@ public class UserController {
         tokenService.userLogout(session);
         model.addAttribute("user", new MUser());
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/setting")
+    public String setting(Model model){
+        return UiPath.setPath(model, "/user/setting");
     }
 }

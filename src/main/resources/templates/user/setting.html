@@ -1,76 +1,20 @@
-<div xmlns:th="http://www.thymeleaf.org">
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h2>Settings</h2>
+<div xmlns:th="http://www.thymeleaf.org" class="container">
+    <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#settingNavbarContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="settingNavbarContent">
+            <h5 class="form-inline">User information</h5>
         </div>
-        <div class="panel-body">
-            <!-- Group -->
-            <div class="panel panel-default">
-                <div class="panel-heading">Group setting<a role="button" class="btn btn-default" data-toggle="modal"
-                                                           data-target="#moduleModule"><span
-                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add</a></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-2" th:each="module,status:${modules}">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <h3 th:text="${module.name}">家庭组</h3>
-                                    <p th:text="${module.description}">a number of people or things that are located
-                                        close together or are considered or classed together.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- module -->
-            <div class="modal fade" tabindex="-1" role="dialog" id="moduleModule">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form th:action="@{/user/module/add}" th:object="${currentModule}" method="post">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Add module</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon" id="module-name">Name</span>
-                                    <input type="text" class="form-control" placeholder="Username"
-                                           aria-describedby="module-name" th:field="*{name}">
-                                </div>
-                                <p></p>
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-addon" id="module-description">Desc</span>
-                                    <input class="form-control" placeholder="Some to describe the module"
-                                           aria-describedby="module-description" th:field="*{description}">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Ok</button>
-                            </div>
-                        </form>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <!-- Other -->
-            <div class="panel panel-default">
-                <div class="panel-heading">Other setting</div>
-                <div class="panel-body">
-                    <div class="row container">
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <h3>Thumbnail label</h3>
-                                    <p>...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </nav>
+
+    <!-- display info -->
+    <div class="bg-light">
+        <div class="inline">
+            <label>User name</label>
+            <h5 th:text="${session.user.name}"></h5>
         </div>
     </div>
-
 </div>
