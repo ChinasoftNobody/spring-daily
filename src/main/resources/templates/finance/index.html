@@ -1,96 +1,77 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <button class="btn btn-primary"
-                        aria-haspopup="true" aria-expanded="false"
-                        data-toggle="modal" data-target="#CreateRecordModal"><span
-                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>新建
+        <div>
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#financialNavbarContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-            </div>
-            <div class="panel-body">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                <div class="collapse navbar-collapse" id="financialNavbarContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <button class="btn btn-outline-primary" aria-haspopup="true" aria-expanded="false"
+                                    data-toggle="modal" data-target="#CreateRecordModal">Create
+                            </button>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
-
-                <div id="test" th:include="/common/table::table(${recordPage})"></div>
-                <!-- 分页 -->
-                <div th:replace="/common/pagination::pagination('test','/daily/finance/queryByFilter',${recordPage})"></div>
-            </div>
+            </nav>
         </div>
+        <!-- data -->
+        <div id="test" th:include="/common/table::table('test','/daily/finance/queryByFilter',${recordPage})"></div>
+
     </div>
 
+
     <!-- Modal of CreateRecord -->
-    <div class="modal fade" id="CreateRecordModal" tabindex="-1" role="dialog" aria-labelledby="CreateRecordModal">
+    <div class="modal" id="CreateRecordModal" tabindex="-1" role="dialog" aria-labelledby="CreateRecordModal">
         <div class="modal-dialog" role="document">
             <form th:action="@{/finance/addRecord}" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title">Create financial record</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">新建记录</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="input-group">
-                            <span class="input-group-addon">主题</span>
-                            <input type="text" class="form-control" placeholder="主题"
-                                   aria-describedby="sizing-addon1" name="subject">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">类型</span>
-                            <div class="dropdown">
-                                <input hidden="hidden" name="type" id="typeDropdownMenu" value="支出">
-                                <input class="btn btn-default dropdown-toggle" type="button"
-                                       id="typeDropdownMenuDisplay" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="true" value="支出">
-                                <ul class="dropdown-menu" aria-labelledby="typeDropdownMenu">
-                                    <li>
-                                        <a onclick="javascript:$('#typeDropdownMenu').val('支出');$('#typeDropdownMenuDisplay').val('支出')">支出</a>
-                                    </li>
-                                    <li>
-                                        <a onclick="javascript:$('#typeDropdownMenu').val('收入');$('#typeDropdownMenuDisplay').val('收入')">收入</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select class="form-control" id="type" name="type">
+                                <option>Incoming</option>
+                                <option>Outputting</option>
+                            </select>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">金额</span>
-                            <input type="number" class="form-control" placeholder="金额"
-                                   aria-describedby="sizing-addon1" name="amount">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" id="amount" placeholder="Amount" name="amount">
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">备注</span>
-                            <input type="text" class="form-control" placeholder="备注"
-                                   aria-describedby="sizing-addon1" name="remarks">
+                        <div class="form-group">
+                            <label for="occurrenceTime">Occurrence time</label>
+                            <input type="date" class="form-control" id="occurrenceTime" placeholder="Occurrence time" name="occurrenceTime">
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">发生时间</span>
-                            <input type="datetime-local" class="form-control" placeholder="发生时间"
-                                   aria-describedby="sizing-addon1" name="occurrenceTime">
+                        <div class="form-group">
+                            <label for="occurrenceMemberName">Occurrence member</label>
+                            <select class="form-control" id="occurrenceMemberName" name="occurrenceMember.id">
+                                <option th:each="user,status:${users}" th:value="${user.id}" th:text="${user.name}"></option>
+                            </select>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">发生人</span>
-                            <div class="dropdown">
-                                <input hidden="hidden" name="occurrenceMember.id" id="occurrenceMemberId">
-                                <input hidden="hidden" name="occurrenceMember.name" id="occurrenceMemberName">
-                                <input class="btn btn-default dropdown-toggle" type="button"
-                                       data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="true" value="点我选择" id="occurrenceMemberNameDisplay">
-                                <ul class="dropdown-menu" aria-labelledby="typeDropdownMenu">
-                                    <li th:each="user,status:${users}">
-                                        <a th:onclick="${'javascript:FinancialService.chooseOccurrenceMember('+user.id+','''+user.name+''')'}"
-                                           th:text="${user.name}"></a></li>
-                                </ul>
-                            </div>
+                        <div class="form-group">
+                            <label for="remarks">Remarks</label>
+                            <textarea type="text" class="form-control" id="remarks" name="remarks"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary">确认
-                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Ok</button>
                     </div>
                 </div>
             </form>

@@ -48,6 +48,8 @@ public class FinancialController {
     public String queryByFilter(Model model, RecordQuery query){
         Page<MRecord> records = financialService.queryByFilter(query);
         model.addAttribute("data", records);
+        model.addAttribute("doc","test");
+        model.addAttribute("url","/daily/finance/queryByFilter");
         return "/common/table::table";
     }
 }

@@ -1,16 +1,16 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="table(data)">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="table(doc,url,data)">
     <table class="table">
         <thead>
         <tr>
-            <th>编号</th>
-            <th>主题</th>
-            <th>类型</th>
-            <th>金额</th>
-            <th>备注</th>
-            <th>发生时间</th>
-            <th>发生人</th>
-            <th>入库时间</th>
-            <th>操作</th>
+            <th>No</th>
+            <th>Subject</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Remarks</th>
+            <th>OccurrenceTime</th>
+            <th>OccurrenceMember</th>
+            <th>UpdateTime</th>
+            <th>Operation</th>
         </tr>
         </thead>
         <tbody>
@@ -27,4 +27,6 @@
         </tr>
         </tbody>
     </table>
+    <!-- 分页 -->
+    <div th:include="/common/pagination::pagination(${doc},${url},${data})"></div>
 </div>
