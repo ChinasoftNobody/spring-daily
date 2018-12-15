@@ -32,8 +32,9 @@
     </ul>
 
     <!-- create model-->
-    <div class="modal" id="CreatePlanModal" tabindex="-1" role="dialog" aria-labelledby="CreatePlanModal">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="CreatePlanModal" tabindex="-1" role="dialog"
+         aria-labelledby="CreatePlanModal">
+        <div class="modal-dialog modal-lg" role="document">
             <form th:action="@{/plan/addPlan}" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -47,14 +48,6 @@
                             <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
                         </div>
                         <div class="form-group">
-                            <label for="timeStart">Time start</label>
-                            <input type="time" class="form-control" id="timeStart" name="timeStart">
-                        </div>
-                        <div class="form-group">
-                            <label for="timeEnd">Time end</label>
-                            <input type="time" class="form-control" id="timeEnd" name="timeEnd">
-                        </div>
-                        <div class="form-group">
                             <label for="loopType">Loop type</label>
                             <select class="form-control" id="loopType" name="loopType">
                                 <option value="None">None</option>
@@ -66,6 +59,16 @@
                             <textarea type="text" class="form-control" id="remarks" name="remarks"></textarea>
                         </div>
                         <input hidden="hidden" name="status" value="On">
+                        <!-- fragments -->
+                        <div>
+                            <label>Fragments</label>
+                            <ul class="nav">
+                                <li class="nav-item"><a class="nav-link active" href="#"
+                                                        onclick="planService.addFragment()">Add</a></li>
+                            </ul>
+                            <ul id="fragmentsUl" class="list-group">
+                            </ul>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -75,4 +78,49 @@
             </form>
         </div>
     </div>
+    <script th:inline="javascript" language="JavaScript">
+        var planService = {
+            addFragment: function () {
+                var $fragmentsUl = $('#fragmentsUl');
+                var num = $('#fragmentsUl li').length;
+                $fragmentsUl.append('<li class="list-group-item">\n' +
+                    '                                    <div class="row">\n' +
+                    '                                        <div class="col-sm-12">\n' +
+                    '                                            <div class="input-group mb-3">\n' +
+                    '                                                <div class="input-group-prepend">\n' +
+                    '                                                    <span class="input-group-text" id="basic-addon3">Subject</span>\n' +
+                    '                                                </div>\n' +
+                    '                                                <input type="text" class="form-control" aria-label="timeStart"\n' +
+                    '                                                       aria-describedby="basic-addon3" name="fragments[' + num + '].subject">\n' +
+                    '                                            </div>\n' +
+                    '                                        </div>\n' +
+                    '                                        <div class="col-sm-5">\n' +
+                    '                                            <div class="input-group mb-3">\n' +
+                    '                                                <div class="input-group-prepend">\n' +
+                    '                                                    <span class="input-group-text" id="basic-addon1">Time start</span>\n' +
+                    '                                                </div>\n' +
+                    '                                                <input type="time" class="form-control" aria-label="timeStart"\n' +
+                    '                                                       aria-describedby="basic-addon1" name="fragments[' + num + '].timeStart">\n' +
+                    '                                            </div>\n' +
+                    '                                        </div>\n' +
+                    '                                        <div class="col-sm-5">\n' +
+                    '                                            <div class="input-group mb-3">\n' +
+                    '                                                <div class="input-group-prepend">\n' +
+                    '                                                    <span class="input-group-text" id="basic-addon2">Time end</span>\n' +
+                    '                                                </div>\n' +
+                    '                                                <input type="time" class="form-control" aria-label="timeEnd"\n' +
+                    '                                                       aria-describedby="basic-addon2" name="fragments[' + num + '].timeEnd">\n' +
+                    '                                            </div>\n' +
+                    '                                        </div>\n' +
+                    '                                        <div class="col-sm-2">\n' +
+                    '                                            <div class="form-check">\n' +
+                    '                                                <input type="radio" class="form-check-input" id="statusRadio" name="fragments[' + num + '].up">\n' +
+                    '    <label class="form-check-label" for="exampleCheck1">Up</label>' +
+                    '                                            </div>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                </li>');
+            }
+        };
+    </script>
 </div>

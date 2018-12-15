@@ -9,4 +9,5 @@ public interface PlanService {
 
     List<MPlan> queryAllPlans();
 
+    List<MPlan> queryAlarmPlans();
 }
