@@ -1,4 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+    <audio id="voiceClockAudio" controls="controls" src=""></audio>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Daily</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -61,7 +62,8 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp"
+                            <input type="password" class="form-control" id="password" name="password"
+                                   aria-describedby="passwordHelp"
                                    placeholder="Password">
                             <small id="passwordHelp" class="form-text text-muted">Please type password</small>
                         </div>
@@ -88,21 +90,28 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="register_user_name">User name</label>
-                            <input type="text" class="form-control" id="register_user_name" name="name" aria-describedby="register_user_name_help"
+                            <input type="text" class="form-control" id="register_user_name" name="name"
+                                   aria-describedby="register_user_name_help"
                                    placeholder="Name">
-                            <small id="register_user_name_help" class="form-text text-muted">Please type your name</small>
+                            <small id="register_user_name_help" class="form-text text-muted">Please type your name
+                            </small>
                         </div>
                         <div class="form-group">
                             <label for="register_user_password">Password</label>
-                            <input type="password" class="form-control" id="register_user_password" name="password" aria-describedby="register_user_password_help"
+                            <input type="password" class="form-control" id="register_user_password" name="password"
+                                   aria-describedby="register_user_password_help"
                                    placeholder="Password">
-                            <small id="register_user_password_help" class="form-text text-muted">Please type password</small>
+                            <small id="register_user_password_help" class="form-text text-muted">Please type password
+                            </small>
                         </div>
                         <div class="form-group">
                             <label for="re_register_user_password">Confirm password</label>
-                            <input type="password" class="form-control" id="re_register_user_password" aria-describedby="re_register_user_password_help"
+                            <input type="password" class="form-control" id="re_register_user_password"
+                                   aria-describedby="re_register_user_password_help"
                                    placeholder="Confirm password">
-                            <small id="re_register_user_password_help" class="form-text text-muted">Please confirm password</small>
+                            <small id="re_register_user_password_help" class="form-text text-muted">Please confirm
+                                password
+                            </small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -124,6 +133,27 @@
                 </ul>
             </div>
         </div>
-
     </div>
+
+    <!-- script -->
+    <script language="JavaScript" th:inline="javascript">
+        var headerService = {
+            initClock: function () {
+                var t1 = window.setInterval(function () {
+                    headerService.voiceClock('https://gss0.baidu.com/6KAZsjip0QIZ8tyhnq/text2audio?tex=%E6%95%B0(shu4)%E5%AD%A6(xue2)&cuid=baike&lan=ZH&ctp=1&pdt=31&vol=9&spd=4')
+
+                }, 10000);
+            },
+            voiceClock: function (src) {
+                var ele = document.getElementById('voiceClockAudio');
+                var $ele = $('#voiceClockAudio');
+                $ele.attr('src', src);
+                ele.load();
+                ele.play();
+            }
+        };
+        $(function () {
+            headerService.initClock();
+        })
+    </script>
 </div>
