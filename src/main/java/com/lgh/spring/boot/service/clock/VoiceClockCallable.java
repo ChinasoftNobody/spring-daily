@@ -15,6 +15,8 @@ public class VoiceClockCallable implements Runnable {
 
     @Override
     public void run() {
-        voiceClockService.voice(voiceClockMessage);
+
+
+        voiceClockService.addMessage(voiceClockMessage);
     }
 }
