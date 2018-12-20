@@ -39,6 +39,7 @@ services:
       - "16010:16010"
       - "16201:16201"
       - "16301:16301"
+    restart: always
 
   app:
     container_name: daily-service
@@ -53,4 +54,5 @@ services:
     depends_on:
       - nginx
       - mysql
+      - hbase
     command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
