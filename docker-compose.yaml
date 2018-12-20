@@ -41,6 +41,24 @@ services:
       - "16301:16301"
     restart: always
 
+  elasticsearch:
+    container_name: daily-es
+    image: elasticsearch:6.5.3
+    environment:
+      discovery.type: "single-node"
+    network_mode: host
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: always
+
+  elasticsearch-head:
+    container_name: daily-es-head
+    image: alivv/elasticsearch-head:latest
+    ports:
+      - "9100:9100"
+    restart: always
+
   app:
     container_name: daily-service
     restart: always
@@ -55,4 +73,6 @@ services:
       - nginx
       - mysql
       - hbase
+      - elasticsearch
+      - elasticsearch-head
     command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
