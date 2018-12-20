@@ -1,29 +1,44 @@
 version: '3'
 services:
   nginx:
-   container_name: daily-nginx
-   image: nginx:latest
-   restart: always
-   ports:
-   - 80:80
-   - 443:443
-   volumes:
-   - ./nginx/conf.d:/etc/nginx/conf.d
+    container_name: daily-nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
 
   mysql:
-   container_name: daily-mysql
-   image: mysql:5.7
-   environment:
-    MYSQL_DATABASE: daily
-    MYSQL_ROOT_PASSWORD: admin
-    MYSQL_ROOT_HOST: '%'
-   volumes:
-    - ./mysql/data:/var/lib/mysql
-    - ./mysql/config/my.cnf:/etc/my.cnf
-    - ./mysql/init:/docker-entrypoint-initdb.d/
-   ports:
-   - "3306:3306"
-   restart: always
+    container_name: daily-mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: daily
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/config/my.cnf:/etc/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+    restart: always
+
+  hbase:
+    container_name: daily-hbase
+    image: harisekhon/hbase
+    hostname: "daily-hbase"
+    ports:
+      - "2181:2181"
+      - "8080:8080"
+      - "8085:8085"
+      - "9090:9090"
+      - "9095:9095"
+      - "16000:16000"
+      - "16010:16010"
+      - "16201:16201"
+      - "16301:16301"
 
   app:
     container_name: daily-service
