@@ -27,19 +27,12 @@ services:
 
   hbase:
     container_name: daily-hbase
-    image: harisekhon/hbase
+    image: maysham/hbase:latest
     hostname: "daily-hbase"
     ports:
       - "2181:2181"
-      - "8080:8080"
-      - "8085:8085"
-      - "9090:9090"
-      - "9095:9095"
-      - "16000:16000"
       - "16010:16010"
       - "16020:16020"
-      - "16201:16201"
-      - "16301:16301"
     restart: always
 
   elasticsearch:

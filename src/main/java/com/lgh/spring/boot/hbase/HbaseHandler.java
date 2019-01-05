@@ -22,7 +22,7 @@ public class HbaseHandler {
     static {
         try {
             Configuration conf = HBaseConfiguration.create();
-            System.out.println("hbase.zookeeper.quorum");
+            LOG.info("hbase.zookeeper.quorum:" + conf.get("hbase.zookeeper.quorum"));
             connection = ConnectionFactory.createConnection(conf);
             LOG.info("hbase connected");
         } catch (Exception e) {
