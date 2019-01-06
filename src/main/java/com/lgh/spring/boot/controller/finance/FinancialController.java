@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.controller;
+package com.lgh.spring.boot.controller.finance;
 
 import com.github.pagehelper.Page;
 import com.lgh.spring.boot.annotation.Fragment;

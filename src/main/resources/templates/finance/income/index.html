@@ -1,0 +1,21 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="finance-income">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <button class="btn btn-outline-success" type="button">New</button>
+        <form class="form-inline">
+            <input id="keyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="incomeService.searchCard()">Search</button>
+        </form>
+    </nav>
+    <div id="income-cards"></div>
+
+    <script th:inline="javascript" language="JavaScript">
+        var incomeService = {
+            searchCard: function () {
+                $('#income-cards').load('/daily/finance/income/cards',{keyword:$('#keyword').val()});
+            }
+        };
+        $(function () {
+            $('#income-cards').load('/daily/finance/income/cards',{keyword:''});
+        });
+    </script>
+</div>

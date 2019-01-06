@@ -1,6 +1,29 @@
-<div xmlns:th="http://www.thymeleaf.org">
-    <div class="container">
-        <div>
+<div xmlns:th="http://www.thymeleaf.org" class="container-fluid">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income"
+               aria-selected="true">Income</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend" role="tab" aria-controls="expend"
+               aria-selected="false">Expend</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="target-tab" data-toggle="tab" href="#target" role="tab" aria-controls="target"
+               aria-selected="false">Target</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="income" role="tabpanel" aria-labelledby="income-tab">
+            <div th:replace="/finance/income/index::finance-income"></div>
+        </div>
+        <div class="tab-pane fade" id="expend" role="tabpanel" aria-labelledby="expend-tab">...</div>
+        <div class="tab-pane fade" id="target" role="tabpanel" aria-labelledby="target-tab">...</div>
+    </div>
+
+    <div>
+
+        <!--<div>
             <nav class="navbar navbar-expand-lg">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#financialNavbarContent"
@@ -22,8 +45,8 @@
                 </div>
             </nav>
         </div>
-        <!-- data -->
-        <div id="test" th:include="/common/table::table('test','/daily/finance/queryByFilter',${recordPage})"></div>
+        &lt;!&ndash; data &ndash;&gt;
+        <div id="test" th:include="/common/table::table('test','/daily/finance/queryByFilter',${recordPage})"></div>-->
 
     </div>
 
@@ -56,12 +79,14 @@
                         </div>
                         <div class="form-group">
                             <label for="occurrenceTime">Occurrence time</label>
-                            <input type="date" class="form-control" id="occurrenceTime" placeholder="Occurrence time" name="occurrenceTime">
+                            <input type="date" class="form-control" id="occurrenceTime" placeholder="Occurrence time"
+                                   name="occurrenceTime">
                         </div>
                         <div class="form-group">
                             <label for="occurrenceMemberName">Occurrence member</label>
                             <select class="form-control" id="occurrenceMemberName" name="occurrenceMember.id">
-                                <option th:each="user,status:${users}" th:value="${user.id}" th:text="${user.name}"></option>
+                                <option th:each="user,status:${users}" th:value="${user.id}"
+                                        th:text="${user.name}"></option>
                             </select>
                         </div>
                         <div class="form-group">
