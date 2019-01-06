@@ -1,9 +1,9 @@
-package com.lgh.spring.boot.controller.finance.income;
+package com.lgh.spring.boot.controller.finance.expend;
 
 import com.lgh.spring.boot.annotation.Fragment;
-import com.lgh.spring.boot.model.finance.MIncomeCard;
+import com.lgh.spring.boot.model.finance.MExpendCard;
 import com.lgh.spring.boot.pojo.common.Response;
-import com.lgh.spring.boot.service.financial.IncomeService;
+import com.lgh.spring.boot.service.financial.ExpendService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,25 +14,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
-
 @Controller
-@RequestMapping("/finance/income")
-public class IncomeController {
+@RequestMapping("/finance/expend")
+public class ExpendController {
     @Resource
-    private IncomeService incomeService;
+    private ExpendService expendService;
 
     @PostMapping("/cards")
     @Fragment
     public String cards(Model model, String keyword){
-        List<MIncomeCard> arrayList = incomeService.queryCards(keyword);
+        List<MExpendCard> arrayList = expendService.queryCards(keyword);
         model.addAttribute("cards",arrayList);
-        return "/finance/income/cards::finance-income-cards";
+        return "/finance/expend/cards::finance-expend-cards";
     }
 
     @PostMapping("/createCard")
     @ResponseBody
-    public Response createCard(@RequestBody MIncomeCard card){
-        if (incomeService.createCard(card)){
+    public Response createCard(@RequestBody MExpendCard card){
+        if (expendService.createCard(card)){
             return ResponseUtil.success(card);
         }
         return ResponseUtil.error("failed");

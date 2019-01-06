@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.mapper;
+package com.lgh.spring.boot.mapper.finance;
 
 import com.lgh.spring.boot.model.MRecord;
 import org.apache.ibatis.annotations.Param;

@@ -99,7 +99,31 @@ var paramUtil = {
         for (var i = 0; i < kvs.length; i++) {
             var kv = kvs[i].split('=');
             if (kv.length === 2) {
-                result[kv[0]] = kv[1];
+                var names = kv[0].split('.');
+                if(names.length > 1){
+                    var temp = {};
+                    for (var m = 0; m < names.length; m++){
+                        var name = names[m];
+                        if (m === 0){
+                            if (!result[name]){
+                                result[name] = {};
+                            }
+                            temp = result[name];
+                        }else if (m < names.length - 1){
+                            if (!temp[name]){
+                                temp[name] = {};
+                            }
+                            temp = temp[name];
+                        }else {
+                            if (!temp[name]){
+                                temp[name] = {};
+                            }
+                            temp[name] = kv[1];
+                        }
+                    }
+                }else {
+                    result[kv[0]] = kv[1];
+                }
             }
         }
         console.log(result);

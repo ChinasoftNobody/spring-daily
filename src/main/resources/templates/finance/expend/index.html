@@ -1,0 +1,79 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="finance-expend">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <button type="button" data-toggle="modal" data-target="#CreateExpendModal" class="btn btn-outline-success">
+            Create
+        </button>
+        <div class="form-inline">
+            <input id="expendKeyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="expendService.searchCard()">
+                Search
+            </button>
+        </div>
+    </nav>
+    <div id="expend-cards"></div>
+
+    <!-- modal -->
+    <div class="modal" id="CreateExpendModal" tabindex="-1" role="dialog" aria-labelledby="CreateExpendModal">
+        <div class="modal-dialog" role="document">
+            <form id="CreateExpendModalForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Create financial expend</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="expendSubject">Subject</label>
+                            <input type="text" class="form-control" id="expendSubject" placeholder="Subject" name="subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="expendAmount">Amount</label>
+                            <input type="number" class="form-control" id="expendAmount" placeholder="Amount" name="amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="expendFrequencyCount">Frequency Count</label>
+                            <input type="number" class="form-control" id="expendFrequencyCount" placeholder="Frequency Count"
+                                   name="frequency.count">
+                        </div>
+                        <div class="form-group">
+                            <label for="expendFrequencyUnit">Frequency Unit</label>
+                            <select class="form-control" id="expendFrequencyUnit" name="frequency.unit">
+                                <option value="Moth">Moth</option>
+                                <option value="Year">Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendDescription">Description</label>
+                            <textarea type="text" class="form-control" id="expendDescription" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="expendService.createCard()">Ok</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script th:inline="javascript" language="JavaScript">
+        var expendService = {
+            searchCard: function () {
+                $('#expend-cards').load('/daily/finance/expend/cards', {keyword: $('#expendKeyword').val()});
+            },
+            createCard: function () {
+                ajaxUtil.ajaxPostForm('/daily/finance/expend/createCard',$('#CreateExpendModalForm'),function(data){
+                    $('#CreateExpendModal').modal('hide');
+                    $('#expend-cards').load('/daily/finance/expend/cards', {keyword: $('#expendKeyword').val()});
+
+                },function (e) {
+                    console.error(e)
+                })
+            }
+        };
+        $(function () {
+            $('#expend-cards').load('/daily/finance/expend/cards', {keyword: ''});
+        });
+    </script>
+</div>

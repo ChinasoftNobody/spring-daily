@@ -2,7 +2,7 @@ package com.lgh.spring.boot.service.financial.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.lgh.spring.boot.mapper.FinancialMapper;
+import com.lgh.spring.boot.mapper.finance.FinancialMapper;
 import com.lgh.spring.boot.model.MRecord;
 import com.lgh.spring.boot.pojo.finance.RecordQuery;
 import com.lgh.spring.boot.service.financial.FinancialService;

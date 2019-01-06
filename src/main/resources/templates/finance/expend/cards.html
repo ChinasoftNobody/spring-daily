@@ -1,11 +1,11 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="finance-income-cards">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="finance-expend-cards">
     <div class="card-deck">
         <div class="col-sm-3" th:each="card,stats:${cards}">
             <div class="card">
                 <!--<img class="card-img-top" src="..." alt="Card image cap">-->
                 <div class="card-body">
                     <h5 class="card-title" th:text="${card.subject}">NA</h5>
-                    <h3 class="card-title text-info"
+                    <h3 class="card-title text-danger"
                         th:text="${'¥' + card.amount + ' /' + (card.frequency?.count ==1?'':card.frequency?.count) + card.frequency?.unit}"></h3>
                     <p class="card-text" th:text="${card.description}"></p>
                 </div>

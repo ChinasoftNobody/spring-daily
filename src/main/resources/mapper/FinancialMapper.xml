@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lgh.spring.boot.mapper.FinancialMapper">
+<mapper namespace="com.lgh.spring.boot.mapper.finance.FinancialMapper">
     <resultMap id="base" type="com.lgh.spring.boot.model.MBase">
         <id column="id" property="id"/>
         <result column="del" property="del"/>
