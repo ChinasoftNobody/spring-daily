@@ -11,17 +11,15 @@
                     <a class="nav-link" th:href="@{/dashboard}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="collapse"
-                       data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">Features</a>
+                    <a class="nav-link" th:href="@{/library}"  aria-expanded="true" aria-controls="collapseMenu">Library</a>
                 </li>
-
             </ul>
             <div class="form-inline" th:if="${session.user==null}">
                 <a class="nav-link" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false"
                    data-toggle="modal" data-target="#LoginModal">Login
                 </a>
-                <span>/</span>
+                <span>|</span>
                 <a class="nav-link" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false"
                    data-toggle="modal" data-target="#RegisterModal">Register
@@ -42,12 +40,12 @@
     </nav>
 
     <!-- Modal of login -->
-    <div class="modal" tabindex="-1" role="dialog" id="LoginModal" aria-labelledby="myModalLabel">
+    <div class="modal fade" tabindex="-1" role="dialog" id="LoginModal" aria-labelledby="LoginModalLabel">
         <div class="modal-dialog" role="document">
             <form th:action="@{/user/login}" method="post" id="loginForm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Login</h5>
+                        <h5 class="modal-title" id="LoginModalLabel">Login</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -76,7 +74,7 @@
         </div>
     </div>
     <!-- Model of register -->
-    <div class="modal" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="registerForm">
@@ -118,18 +116,6 @@
                         <button type="button" class="btn btn-primary" onclick="userService.register()">Ok</button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-    <!-- menu -->
-    <div class="collapse" id="collapseMenu">
-        <div class="bg-light">
-            <div class="container">
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/finance}">Financial</a></li>
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/plan}">Plan</a></li>
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/learn}">Learn</a></li>
-                </ul>
             </div>
         </div>
     </div>

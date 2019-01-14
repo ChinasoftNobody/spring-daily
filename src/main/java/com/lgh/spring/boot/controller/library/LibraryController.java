@@ -1,4 +1,4 @@
-package com.lgh.spring.boot.controller.finance;
+package com.lgh.spring.boot.controller.library;
 
 import com.github.pagehelper.Page;
 import com.lgh.spring.boot.annotation.Fragment;
@@ -18,11 +18,11 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 财务管理
+ * library management
  */
 @Controller
-@RequestMapping("/finance")
-public class FinancialController {
+@RequestMapping("/library")
+public class LibraryController {
     @Resource
     private FinancialService financialService;
     @Resource
@@ -34,22 +34,6 @@ public class FinancialController {
         List<MUser> users = userService.queryAll();
         model.addAttribute("recordPage", recordPage);
         model.addAttribute("users", users);
-        return UiPath.setPath(model, "/finance/index",null,"/static/js/financial/index.js");
-    }
-
-    @PostMapping(value = "/addRecord")
-    public String addRecord(MRecord record){
-        financialService.addRecord(record);
-        return "redirect:/finance";
-    }
-
-    @PostMapping("/queryByFilter")
-    @Fragment
-    public String queryByFilter(Model model, RecordQuery query){
-        Page<MRecord> records = financialService.queryByFilter(query);
-        model.addAttribute("data", records);
-        model.addAttribute("doc","test");
-        model.addAttribute("url","/daily/finance/queryByFilter");
-        return "/common/table::table";
+        return UiPath.setPath(model, "/library/index");
     }
 }
