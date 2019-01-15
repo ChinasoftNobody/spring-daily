@@ -24,11 +24,38 @@ public class RestTemplateUtil {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = new HttpEntity<>(body);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST,entity,String.class,"");
-        if(response.getStatusCode().equals(HttpStatus.OK)){
-            logger.info("[Remote success]:{}",response.getBody());
+        return getString(response);
+    }
+
+    /**
+     * get方法
+     * @param url 地址
+     * @return 返回结果
+     */
+    public static String get(String url){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> entity = new HttpEntity<>("");
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class,"");
+        }catch (Exception e){
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("retry: " + url);
+            return get(url);
+        }
+        return getString(response);
+    }
+
+    private static String getString(ResponseEntity<String> response) {
+        if (response.getStatusCode().equals(HttpStatus.OK)) {
+            logger.info("[Remote success]:{}", response.getBody());
             return response.getBody();
         }
-        logger.info("[Remote failed]:{}",response.getStatusCodeValue());
+        logger.info("[Remote failed]:{}", response.getStatusCodeValue());
         return null;
     }
 }

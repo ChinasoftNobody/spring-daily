@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgh.spring.boot.mapper.ClassifyMapper">
+    <delete id="dropAll">
+        truncate table t_library_classify;
+    </delete>
+
+    <insert id="save" parameterType="com.lgh.spring.boot.model.library.MClassify">
+        insert into t_library_classify(`number`,`parentNumber`,`name`,`description`,`source`)
+        values
+        <foreach collection="classifies" item="classify" separator=",">
+            (#{classify.number},#{classify.parentNumber},#{classify.name},#{classify.description},#{classify.source})
+        </foreach>
+    </insert>
+</mapper>
