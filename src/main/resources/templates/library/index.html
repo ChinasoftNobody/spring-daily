@@ -8,6 +8,6 @@
         </div>
     </nav>
     <div class="bg-white">
-        <h1>Books Info</h1>
+        <p th:each="resource,stats:${resources}" th:text="${resource.name}"></p>
     </div>
 </div>

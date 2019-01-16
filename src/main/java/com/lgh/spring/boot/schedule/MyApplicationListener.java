@@ -13,6 +13,5 @@ public class MyApplicationListener implements ApplicationListener<ContextRefresh
     private ClassifyService classifyService;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        classifyService.resetClassifyInfo();
     }
 }
