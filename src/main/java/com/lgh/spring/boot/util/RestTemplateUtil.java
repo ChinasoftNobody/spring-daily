@@ -14,6 +14,7 @@ import java.util.HashMap;
  * Created by Administrator on 2017/5/7.
  */
 public class RestTemplateUtil {
+    private static final RestTemplate REST_TEMPLATE = new RestTemplate();
     private static Logger logger = LoggerFactory.getLogger(RestTemplateUtil.class);
 
     /**
@@ -35,9 +36,8 @@ public class RestTemplateUtil {
      * @return 返回结果
      */
     public static String get(String url){
-        RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = new HttpEntity<>("");
-        return exchangeGet(url, restTemplate, entity);
+        return exchangeGet(url, REST_TEMPLATE, entity);
     }
 
     /**
@@ -63,9 +63,8 @@ public class RestTemplateUtil {
      * @return 返回结果
      */
     public static String get(String url, HashMap<String, Object> params){
-        RestTemplate restTemplate = new RestTemplate();
         HttpEntity<HashMap<String, Object>> entity = new HttpEntity<>(params);
-        return exchangeGet(url, restTemplate, entity);
+        return exchangeGet(url, REST_TEMPLATE, entity);
     }
 
     private static String getString(ResponseEntity<String> response) {
