@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 /**
  * Created by Administrator on 2017/5/7.
  */
@@ -35,19 +37,35 @@ public class RestTemplateUtil {
     public static String get(String url){
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = new HttpEntity<>("");
+        return exchangeGet(url, restTemplate, entity);
+    }
+
+    /**
+     * exchangeGet
+     * @param url url
+     * @param restTemplate restTemplate
+     * @param entity entity
+     * @return result
+     */
+    private static String exchangeGet(String url, RestTemplate restTemplate, HttpEntity entity) {
         ResponseEntity<String> response;
         try {
-            response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class,"");
+            response = restTemplate.exchange(url, HttpMethod.GET,entity,String.class,entity.getBody());
         }catch (Exception e){
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
-            System.out.println("retry: " + url);
-            return get(url);
+            return null;
         }
         return getString(response);
+    }
+
+    /**
+     * get方法
+     * @param url 地址
+     * @return 返回结果
+     */
+    public static String get(String url, HashMap<String, Object> params){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<HashMap<String, Object>> entity = new HttpEntity<>(params);
+        return exchangeGet(url, restTemplate, entity);
     }
 
     private static String getString(ResponseEntity<String> response) {

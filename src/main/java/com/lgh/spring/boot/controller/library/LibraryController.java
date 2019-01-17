@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.controller.library;
 
 import com.lgh.spring.boot.model.library.MResource;
+import com.lgh.spring.boot.service.library.BookService;
 import com.lgh.spring.boot.service.library.ResourceService;
 import com.lgh.spring.boot.util.UiPath;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,15 @@ import java.util.List;
 public class LibraryController {
     @Resource
     private ResourceService resourceService;
+    @Resource
+    private BookService bookService;
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         List<MResource> resources = resourceService.queryExternalResource();
-        model.addAttribute("resources",resources);
+        model.addAttribute("resources", resources);
+        model.addAttribute("books", bookService.remoteSearch("asd"));
         return UiPath.setPath(model, "/library/index");
     }
+
 }
