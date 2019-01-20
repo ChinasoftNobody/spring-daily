@@ -1,1 +1,0 @@
-alter table t_user add column alias varchar(64) null default null after name;

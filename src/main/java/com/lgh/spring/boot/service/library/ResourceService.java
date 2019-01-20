@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.service.library;
 
-import com.lgh.spring.boot.model.library.MResource;
+
+import com.lgh.spring.boot.mongo.model.library.MResource;
 
 import java.util.List;
 

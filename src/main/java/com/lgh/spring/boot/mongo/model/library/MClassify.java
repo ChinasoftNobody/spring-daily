@@ -1,10 +1,12 @@
-package com.lgh.spring.boot.model.library;
+package com.lgh.spring.boot.mongo.model.library;
 
-import com.lgh.spring.boot.model.MBase;
+import com.lgh.spring.boot.mongo.model.MBase;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 分类
  */
+@Document(collection = "t_classify")
 public class MClassify extends MBase {
     private int number;
     private int parentNumber;

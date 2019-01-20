@@ -1,7 +1,9 @@
-package com.lgh.spring.boot.model.library;
+package com.lgh.spring.boot.mongo.model.library;
 
-import com.lgh.spring.boot.model.MBase;
+import com.lgh.spring.boot.mongo.model.MBase;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "t_resource")
 public class MResource extends MBase {
     private String name;
     private String description;

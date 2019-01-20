@@ -1,6 +1,6 @@
 package com.lgh.spring.boot.schedule;
 
-import com.lgh.spring.boot.model.library.MResource;
+import com.lgh.spring.boot.mongo.model.library.MResource;
 import com.lgh.spring.boot.service.library.ResourceService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

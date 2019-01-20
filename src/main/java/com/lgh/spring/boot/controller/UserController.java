@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.controller;
 
-import com.lgh.spring.boot.model.MUser;
+
+import com.lgh.spring.boot.mongo.model.MUser;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;

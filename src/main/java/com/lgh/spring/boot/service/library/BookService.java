@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.service.library;
 
 
-import com.lgh.spring.boot.model.library.MBook;
+import com.lgh.spring.boot.mongo.model.library.MBook;
 
 import java.util.List;
 

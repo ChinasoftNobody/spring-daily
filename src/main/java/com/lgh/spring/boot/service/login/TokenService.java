@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.service.login;
 
 
-import com.lgh.spring.boot.model.MUser;
+import com.lgh.spring.boot.mongo.model.MUser;
 import com.lgh.spring.boot.pojo.common.TokenUser;
 
 import javax.servlet.http.HttpServletResponse;

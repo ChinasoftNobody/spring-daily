@@ -1,46 +1,45 @@
 package com.lgh.spring.boot.service.login.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.lgh.spring.boot.mapper.UserMapper;
-import com.lgh.spring.boot.model.MUser;
+
+import com.lgh.spring.boot.mongo.model.MUser;
+import com.lgh.spring.boot.mongo.repo.UserRepo;
 import com.lgh.spring.boot.service.login.UserService;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserMapper userMapper;
+    private UserRepo userRepo;
 
     @Override
     public MUser login(MUser user) {
-        return userMapper.selectByNameAndPassword(user.getName(), user.getPassword());
+        return userRepo.findOne(Example.of(user)).orElse(null);
     }
 
     @Override
     public MUser queryByName(String name) {
-        return userMapper.selectByName(name);
+        return null;
     }
 
     @Override
     public MUser register(MUser user) {
-        if(!userMapper.insert(user)){
-            return null;
-        }
-        return user;
+        return userRepo.insert(user);
     }
 
     @Override
     public MUser queryById(int id) {
-        return userMapper.selectById(id);
+        Optional<MUser> mUser = userRepo.findById(id);
+        return mUser.orElse(null);
     }
 
     @Override
     public List<MUser> queryAll() {
-        return userMapper.selectAll();
+        return userRepo.findAll();
     }
 }

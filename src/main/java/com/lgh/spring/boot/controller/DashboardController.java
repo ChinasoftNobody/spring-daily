@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.controller;
 
 import com.lgh.spring.boot.common.Const;
-import com.lgh.spring.boot.model.MUser;
+import com.lgh.spring.boot.mongo.model.MUser;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.UiPath;
 import org.springframework.stereotype.Controller;

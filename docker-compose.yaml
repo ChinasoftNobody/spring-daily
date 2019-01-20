@@ -10,21 +10,6 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
 
-  mysql:
-    container_name: daily-mysql
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: daily
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_ROOT_HOST: '%'
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/config/my.cnf:/etc/my.cnf
-      - ./mysql/init:/docker-entrypoint-initdb.d/
-    ports:
-      - "3306:3306"
-    restart: always
-
   hbase:
     container_name: daily-hbase
     image: maysham/hbase:latest
@@ -53,6 +38,13 @@ services:
       - "9100:9100"
     restart: always
 
+  mongo:
+    container_name: daily-mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    restart: always
+
   app:
     container_name: daily-service
     restart: always
@@ -65,8 +57,8 @@ services:
       - "8081"
     depends_on:
       - nginx
-      - mysql
       - hbase
       - elasticsearch
       - elasticsearch-head
+      - mongo
     command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker

@@ -1,6 +1,6 @@
 package com.lgh.spring.boot.controller.library;
 
-import com.lgh.spring.boot.model.library.MResource;
+import com.lgh.spring.boot.mongo.model.library.MResource;
 import com.lgh.spring.boot.service.library.BookService;
 import com.lgh.spring.boot.service.library.ResourceService;
 import com.lgh.spring.boot.util.UiPath;

@@ -1,6 +1,7 @@
 package com.lgh.spring.boot.pojo.common;
 
-import com.lgh.spring.boot.model.MUser;
+
+import com.lgh.spring.boot.mongo.model.MUser;
 
 public class TokenUser extends MUser {
     private long loginTime;

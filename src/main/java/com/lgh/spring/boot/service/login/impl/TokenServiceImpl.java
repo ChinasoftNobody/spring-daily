@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.service.login.impl;
 
 import com.lgh.spring.boot.common.Const;
-import com.lgh.spring.boot.model.MUser;
+import com.lgh.spring.boot.mongo.model.MUser;
 import com.lgh.spring.boot.pojo.common.TokenUser;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.util.TokenUtil;

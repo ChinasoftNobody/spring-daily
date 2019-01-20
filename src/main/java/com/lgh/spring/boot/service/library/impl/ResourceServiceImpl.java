@@ -2,8 +2,8 @@ package com.lgh.spring.boot.service.library.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lgh.spring.boot.mapper.ResourceMapper;
-import com.lgh.spring.boot.model.library.MResource;
+import com.lgh.spring.boot.mongo.model.library.MResource;
+import com.lgh.spring.boot.mongo.repo.ResourceRepo;
 import com.lgh.spring.boot.service.library.ResourceService;
 import com.lgh.spring.boot.util.RestTemplateUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Value("${url.getResourceInfo}")
     private String externalGetResourceUrl;
     @Resource
-    private ResourceMapper resourceMapper;
+    private ResourceRepo resourceRepo;
 
     @Override
     public List<MResource> queryExternalResource() {
@@ -58,12 +58,12 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public void dropAll() {
-        resourceMapper.dropAll();
+        resourceRepo.deleteAll();
     }
 
     @Override
     public void save(List<MResource> resources) {
-        resourceMapper.save(resources);
+        resourceRepo.saveAll(resources);
     }
 
 }

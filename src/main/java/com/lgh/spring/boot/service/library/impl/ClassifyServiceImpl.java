@@ -1,7 +1,8 @@
 package com.lgh.spring.boot.service.library.impl;
 
-import com.lgh.spring.boot.mapper.ClassifyMapper;
-import com.lgh.spring.boot.model.library.MClassify;
+
+import com.lgh.spring.boot.mongo.model.library.MClassify;
+import com.lgh.spring.boot.mongo.repo.ClassifyRepo;
 import com.lgh.spring.boot.service.library.ClassifyService;
 import com.lgh.spring.boot.util.RestTemplateUtil;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,15 @@ import java.util.List;
 @Service
 public class ClassifyServiceImpl implements ClassifyService {
     @Resource
-    private ClassifyMapper classifyMapper;
+    private ClassifyRepo classifyRepo;
 
     @Override
     public boolean resetClassifyInfo() {
-        classifyMapper.dropAll();
+        classifyRepo.deleteAll();
         List<MClassify> classifies = new ArrayList<>();
         String url = "http://opac.cdclib.org/opac/browse/query?category=cls&id=0";
         getClassifiesFromUrl(classifies, url);
-        classifyMapper.save(classifies);
+        classifyRepo.saveAll(classifies);
         return true;
     }
 

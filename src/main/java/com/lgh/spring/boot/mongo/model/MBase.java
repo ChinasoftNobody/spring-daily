@@ -1,6 +1,7 @@
-package com.lgh.spring.boot.model;
+package com.lgh.spring.boot.mongo.model;
 
 public class MBase {
+
     private int id;
     private String createOn;
     private String updateOn;
