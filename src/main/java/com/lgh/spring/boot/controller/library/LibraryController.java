@@ -27,8 +27,12 @@ public class LibraryController {
     public String index(Model model) {
         List<MResource> resources = resourceService.queryExternalResource();
         model.addAttribute("resources", resources);
-        model.addAttribute("books", bookService.remoteSearch("asd"));
         return UiPath.setPath(model, "/library/index");
+    }
+
+    @GetMapping("/sclib")
+    public String sclibIndex(Model model){
+        return UiPath.setPath(model, "/library/sclib");
     }
 
 }

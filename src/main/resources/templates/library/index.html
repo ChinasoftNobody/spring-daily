@@ -8,6 +8,10 @@
         </div>
     </nav>
     <div class="bg-white">
-        <p th:each="resource,stats:${books}" th:text="${resource.title}"></p>
+        <div class="list-group">
+            <a th:href="@{/library/sclib}" class="list-group-item list-group-item-action bg-secondary">
+                <img class="rounded float-left" th:src="@{/static/imgs/library/logo-sclib.png}" alt="四川省图书馆">
+            </a>
+        </div>
     </div>
 </div>
