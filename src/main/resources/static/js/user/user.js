@@ -3,7 +3,7 @@ var userService = {
     login: function () {
         var form = $('#loginForm');
         var model = $('#LoginModal');
-        ajaxUtil.ajaxPostForm('/daily/user/login', form, function (data, textStatus, request) {
+        ajaxUtil.ajaxPostFormJson('/daily/user/login', form, function (data, textStatus, request) {
             var token = request.getResponseHeader("token");
             if(token){
                 TokenUtil.setToken(token);
@@ -17,7 +17,7 @@ var userService = {
     register: function () {
         var form = $('#registerForm');
         var model = $('#RegisterModal');
-        ajaxUtil.ajaxPostForm('/daily/user/register',form,function (data) {
+        ajaxUtil.ajaxPostFormJson('/daily/user/register',form,function (data) {
             model.modal('toggle');
         })
     },

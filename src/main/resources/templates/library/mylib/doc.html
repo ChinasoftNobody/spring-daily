@@ -3,7 +3,9 @@
         <div class="form-inline">
             <input class="form-control mr-3" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="button">New</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal"
+                    data-target="#createDocModal">New
+            </button>
         </div>
     </nav>
     <!-- doc list -->
@@ -14,4 +16,60 @@
         <div class="list-group-item list-group-item-action">Porta ac consectetur ac</div>
         <div class="list-group-item list-group-item-action disabled">Vestibulum at eros</div>
     </div>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         id="createDocModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Doc</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="createDocForm" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Subject" name="subject"
+                                       id="docSubject">
+                            </div>
+                            <div class="col">
+                                <select class="custom-select" name="type">
+                                    <option value="word" selected>Word</option>
+                                    <option value="excel">Excel</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="ppt">PPT</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input id="docFile" name="file" type="file" class="file"
+                                       data-show-upload="false" data-show-preview="true">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="mylibDocService.createDoc()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript" language="JavaScript">
+        var mylibDocService = {
+            createDoc : function () {
+                var path = [[@{/library/mylib/createDoc}]];
+                var fd = new FormData();
+                fd.append('file',document.getElementById('docFile').files[0]);
+                ajaxUtil.ajaxPostForm(path,$('#createDocForm'),function(info){
+                    console.log(1111);
+                })
+            }
+        };
+    </script>
 </div>
