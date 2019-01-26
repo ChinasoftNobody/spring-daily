@@ -817,7 +817,7 @@
 					var width = targetRect.right - targetRect.left,
 						height = targetRect.bottom - targetRect.top,
 						floating = R_FLOAT.test(lastCSS.cssFloat + lastCSS.display)
-							|| (lastParentCSS.display == 'flex' && lastParentCSS['flex-direction'].indexOf('row') === 0),
+							|| (lastParentCSS.display == 'flex' && lastParentCSS['flex-direction'].indexOf('model') === 0),
 						isWide = (target.offsetWidth > dragEl.offsetWidth),
 						isLong = (target.offsetHeight > dragEl.offsetHeight),
 						halfway = (floating ? (evt.clientX - targetRect.left) / width : (evt.clientY - targetRect.top) / height) > 0.5,

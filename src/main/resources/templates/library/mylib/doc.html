@@ -10,11 +10,13 @@
     </nav>
     <!-- doc list -->
     <div class="list-group">
-        <div class="list-group-item list-group-item-action">Doc</div>
-        <div class="list-group-item list-group-item-action">Dapibus ac facilisis in</div>
-        <div class="list-group-item list-group-item-action">Morbi leo risus</div>
-        <div class="list-group-item list-group-item-action">Porta ac consectetur ac</div>
-        <div class="list-group-item list-group-item-action disabled">Vestibulum at eros</div>
+        <div class="list-group-item list-group-item-action" th:each="doc,status:${docs}">
+            <div class="row">
+                <div class="col-2" th:text="${doc.subject}"></div>
+                <div class="col-2" th:text="${doc.type}"></div>
+                <div class="col-4" th:text="${doc.files}"></div>
+            </div>
+        </div>
     </div>
 
 
@@ -67,7 +69,8 @@
                 var fd = new FormData();
                 fd.append('file',document.getElementById('docFile').files[0]);
                 ajaxUtil.ajaxPostForm(path,$('#createDocForm'),function(info){
-                    console.log(1111);
+                    $('#createDocForm')[0].reset();
+                    $('#createDocModal').modal('hide');
                 })
             }
         };

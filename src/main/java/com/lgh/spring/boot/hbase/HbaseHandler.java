@@ -40,9 +40,8 @@ public class HbaseHandler {
             Admin admin = connection.getAdmin();
             TableName table = TableName.valueOf(tableName);
             if (admin.tableExists(table)) {
-                admin.disableTable(table);
-                admin.deleteTable(table);
-                LOG.info("drop table to re-create: " + table.getNameAsString());
+                LOG.info("table exists");
+                return true;
             }
             List<ColumnFamilyDescriptor> familyDescriptors = new ArrayList<>(columnFamilies.size());
             columnFamilies.forEach(familyName -> familyDescriptors.add(ColumnFamilyDescriptorBuilder.newBuilder(familyName.getBytes()).build()));
