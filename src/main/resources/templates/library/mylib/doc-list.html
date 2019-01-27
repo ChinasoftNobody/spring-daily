@@ -1,0 +1,32 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="doc-list">
+
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action" th:each="doc,status:${docs.content}">
+            <div class="row">
+                <!--/*@thymesVar id="doc" type="java"*/-->
+                <div class="col-2" th:text="${doc.subject}"></div>
+                <div class="col-2" th:text="${doc.type}"></div>
+                <div class="col-4" th:text="${doc.fileName}"></div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="...">
+        <ul class="pagination justify-content-between">
+            <li th:if="${!docs.hasPrevious()}" class="page-item disabled">
+                <a  class="page-link">Previous</a>
+            </li>
+            <li th:if="${docs.hasPrevious()}" class="page-item">
+                <a class="page-link" th:onclick="|mylibDocService.prevPage(${docs.getNumber()})|" tabindex="-1">Previous</a>
+            </li>
+
+            <li class="page-item disabled" th:if="${!docs.hasNext()}">
+                <div class="page-link">Next</div>
+            </li>
+            <!--/*@thymesVar id="docs" type="java"*/-->
+            <li class="page-item" th:if="${docs.hasNext()}" >
+                <div class="page-link" th:onclick="|mylibDocService.nextPage(${docs.getNumber()})|">Next</div>
+            </li>
+        </ul>
+    </nav>
+</div>

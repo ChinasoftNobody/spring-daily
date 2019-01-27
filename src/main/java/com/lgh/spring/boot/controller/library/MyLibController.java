@@ -1,9 +1,13 @@
 package com.lgh.spring.boot.controller.library;
 
+import com.lgh.spring.boot.annotation.Fragment;
+import com.lgh.spring.boot.mongo.model.mylib.MDoc;
+import com.lgh.spring.boot.pojo.common.PageKeywordQuery;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.library.CreateDocRequest;
 import com.lgh.spring.boot.service.mylib.MyLibService;
 import com.lgh.spring.boot.util.UiPath;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +26,14 @@ public class MyLibController {
 
     @GetMapping("/mylib")
     public String mylibIndex(Model model){
-        model.addAttribute("docs",myLibService.findAll());
         return UiPath.setPath(model, "/library/mylib");
+    }
+    @PostMapping("/mylib/query")
+    @Fragment
+    public String query(Model model, PageKeywordQuery query){
+        Page<MDoc> docPage = myLibService.find(query);
+        model.addAttribute("docs", docPage);
+        return "/library/mylib/doc-list";
     }
 
     @PostMapping("/mylib/createDoc")

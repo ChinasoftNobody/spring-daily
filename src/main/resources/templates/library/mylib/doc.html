@@ -1,24 +1,17 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="mylib-doc">
     <nav class="navbar navbar-light bg-white justify-content-end">
         <div class="form-inline">
-            <input class="form-control mr-3" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            <input class="form-control mr-3" type="search" placeholder="Search" aria-label="Search" id="doc-search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="mylibDocService.search()">
+                Search
+            </button>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal"
                     data-target="#createDocModal">New
             </button>
         </div>
     </nav>
     <!-- doc list -->
-    <div class="list-group">
-        <div class="list-group-item list-group-item-action" th:each="doc,status:${docs}">
-            <div class="row">
-                <div class="col-2" th:text="${doc.subject}"></div>
-                <div class="col-2" th:text="${doc.type}"></div>
-                <div class="col-4" th:text="${doc.files}"></div>
-            </div>
-        </div>
-    </div>
-
+    <div id="doc-content"></div>
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
          id="createDocModal" aria-hidden="true">
@@ -64,15 +57,54 @@
 
     <script th:inline="javascript" language="JavaScript">
         var mylibDocService = {
-            createDoc : function () {
+            queryDocs: function () {
+                var url = [[@{/library/mylib/query}]];
+                $('#doc-content').load(url, {
+                    page: 0,
+                    size: 10,
+                    keyword: ''
+                });
+            },
+            createDoc: function () {
                 var path = [[@{/library/mylib/createDoc}]];
                 var fd = new FormData();
-                fd.append('file',document.getElementById('docFile').files[0]);
-                ajaxUtil.ajaxPostForm(path,$('#createDocForm'),function(info){
+                fd.append('file', document.getElementById('docFile').files[0]);
+                ajaxUtil.ajaxPostForm(path, $('#createDocForm'), function (info) {
                     $('#createDocForm')[0].reset();
                     $('#createDocModal').modal('hide');
+                    mylibDocService.queryDocs();
                 })
+            },
+            search: function () {
+                var url = [[@{/library/mylib/query}]];
+                var keyword = $('#doc-search').val();
+                $('#doc-content').load(url, {
+                    page: 0,
+                    size: 10,
+                    keyword: keyword
+                });
+            },
+            nextPage: function (curPage) {
+                var url = [[@{/library/mylib/query}]];
+                var keyword = $('#doc-search').val();
+                $('#doc-content').load(url, {
+                    page: curPage + 1,
+                    size: 10,
+                    keyword: keyword
+                });
+            },
+            prevPage: function (curPage) {
+                var url = [[@{/library/mylib/query}]];
+                var keyword = $('#doc-search').val();
+                $('#doc-content').load(url, {
+                    page: curPage - 1,
+                    size: 10,
+                    keyword: keyword
+                });
             }
         };
+        $(function () {
+            mylibDocService.queryDocs();
+        })
     </script>
 </div>

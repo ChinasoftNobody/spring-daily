@@ -3,13 +3,12 @@ package com.lgh.spring.boot.mongo.model.mylib;
 import com.lgh.spring.boot.mongo.model.MBase;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Document(collection = "t_book")
 public class MDoc extends MBase {
     private String subject;
     private String type;
-    private List<String> files;
+    private String fileName;
+    private String fileId;
 
     public MDoc() {
     }
@@ -34,11 +33,19 @@ public class MDoc extends MBase {
         this.type = type;
     }
 
-    public List<String> getFiles() {
-        return files;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFiles(List<String> files) {
-        this.files = files;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 }
