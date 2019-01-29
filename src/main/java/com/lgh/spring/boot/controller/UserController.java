@@ -6,18 +6,15 @@ import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.service.login.TokenService;
 import com.lgh.spring.boot.service.login.UserService;
 import com.lgh.spring.boot.util.ResponseUtil;
-import com.lgh.spring.boot.util.UiPath;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
@@ -31,7 +28,6 @@ public class UserController {
 
 
     @PostMapping("/login")
-    @ResponseBody
     public Response login(@RequestBody MUser user, HttpServletResponse response, HttpSession session) {
         MUser mUser = userService.login(user);
         if (mUser != null) {
@@ -43,7 +39,6 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    @ResponseBody
     public Response register(@RequestBody MUser user){
         MUser mUser = userService.queryByName(user.getName());
         if (mUser != null)
@@ -58,15 +53,9 @@ public class UserController {
         return ResponseUtil.success(mUser);
     }
 
-    @GetMapping("/logout")
-    public String logout(Model model, HttpSession session) {
-        tokenService.userLogout(session);
-        model.addAttribute("user", new MUser());
-        return "redirect:/dashboard";
-    }
 
-    @GetMapping("/setting")
-    public String setting(Model model){
-        return UiPath.setPath(model, "/user/setting");
+    @PostMapping("/verify")
+    public Response verify(){
+        return ResponseUtil.success("asdasd");
     }
 }
