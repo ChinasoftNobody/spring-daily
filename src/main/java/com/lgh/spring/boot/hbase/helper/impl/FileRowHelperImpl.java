@@ -4,14 +4,13 @@ import com.lgh.spring.boot.hbase.HbaseHandler;
 import com.lgh.spring.boot.hbase.HbaseRow;
 import com.lgh.spring.boot.hbase.helper.FileRowHelper;
 import com.lgh.spring.boot.hbase.model.FileRow;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Service
+//@Service
 public class FileRowHelperImpl implements FileRowHelper {
 
     private static final String TABLE_NAME = "t_file";

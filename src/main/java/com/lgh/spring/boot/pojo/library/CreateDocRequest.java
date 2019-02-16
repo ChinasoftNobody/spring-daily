@@ -2,9 +2,17 @@ package com.lgh.spring.boot.pojo.library;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class CreateDocRequest {
+    @NotBlank
     private String subject;
+    @NotBlank
+    @Pattern(regexp = "^docx|xlsx$", message = "Type error")
     private String type;
+    @NotNull
     private MultipartFile file;
 
     public String getSubject() {

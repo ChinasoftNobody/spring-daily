@@ -1,7 +1,10 @@
-package com.lgh.spring.boot.pojo.common;
+package com.lgh.spring.boot.pojo.library;
 
-public class KeyWordQuery {
+import com.lgh.spring.boot.pojo.common.PageQuery;
+
+public class QueryBookRequest extends PageQuery {
     private String keyword;
+
 
     public String getKeyword() {
         return keyword;

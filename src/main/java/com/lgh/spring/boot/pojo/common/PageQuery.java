@@ -1,7 +1,11 @@
 package com.lgh.spring.boot.pojo.common;
 
+import javax.validation.constraints.Min;
+
 public class PageQuery {
+    @Min(0)
     private int page;
+    @Min(10)
     private int size;
 
     public int getPage() {

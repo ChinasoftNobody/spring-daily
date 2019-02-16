@@ -6,13 +6,12 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.*;
 
-@Component
+//@Component
 public class HbaseHandler {
 
     private static final Log LOG = LogFactory.getLog(HbaseHandler.class);
