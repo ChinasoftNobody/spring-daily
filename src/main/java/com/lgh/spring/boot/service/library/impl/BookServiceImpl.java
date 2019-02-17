@@ -5,7 +5,6 @@ import com.lgh.spring.boot.mongo.model.library.MBook;
 import com.lgh.spring.boot.mongo.repo.BookRepo;
 import com.lgh.spring.boot.pojo.library.QueryBookRequest;
 import com.lgh.spring.boot.service.library.BookService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,6 @@ import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
-
-    @Value("${url.combinedParsedResult}")
-    private String remoteUrl;
 
     @Resource
     private BookRepo bookRepo;

@@ -6,8 +6,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 /**
@@ -17,6 +19,13 @@ public class RestTemplateUtil {
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();
     private static Logger logger = LoggerFactory.getLogger(RestTemplateUtil.class);
 
+    static {
+        REST_TEMPLATE.getMessageConverters().forEach((item)->{
+            if(item instanceof StringHttpMessageConverter) {
+                ((StringHttpMessageConverter) item).setDefaultCharset(StandardCharsets.UTF_8);
+            }
+        });
+    }
     /**
      * post方法
      * @param url 地址

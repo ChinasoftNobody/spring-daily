@@ -3,7 +3,9 @@ package com.lgh.spring.boot.controller.library;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.library.AddBookRequest;
 import com.lgh.spring.boot.pojo.library.QueryBookRequest;
+import com.lgh.spring.boot.pojo.library.QueryLibBookRequest;
 import com.lgh.spring.boot.service.library.BookService;
+import com.lgh.spring.boot.service.library.LibraryService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +19,11 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping(value = "/book", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class BookController {
+
     @Resource
     private BookService bookService;
+    @Resource
+    private LibraryService libraryService;
 
     @PostMapping("/query")
     public Response queryBooks(@RequestBody @Validated QueryBookRequest request) {
@@ -26,7 +31,12 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public Response addBooks(@RequestBody @Validated AddBookRequest request){
+    public Response addBooks(@RequestBody @Validated AddBookRequest request) {
         return ResponseUtil.success(bookService.addBatch(request.getBooks()));
+    }
+
+    @PostMapping("/queryFromLib")
+    public Response queryBookFromLibrary(@RequestBody @Validated QueryLibBookRequest request) {
+        return ResponseUtil.success(libraryService.queryFromScLib(request.getKeyword()));
     }
 }
