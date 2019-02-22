@@ -25,8 +25,6 @@ public class UserController {
     @Resource
     private TokenService tokenService;
 
-
-
     @PostMapping("/login")
     public Response login(@RequestBody MUser user, HttpServletResponse response, HttpSession session) {
         MUser mUser = userService.login(user);
