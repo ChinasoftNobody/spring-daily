@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepo extends MongoRepository<MBook, String> {
 
-    Page<MBook> findAllByNameContains(String keyword, Pageable pageable);
+    Page<MBook> findAllByNameContaining(String name, Pageable pageable);
 }

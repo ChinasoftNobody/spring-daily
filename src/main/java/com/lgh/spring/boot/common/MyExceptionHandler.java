@@ -14,4 +14,9 @@ public class MyExceptionHandler {
         ex.getBindingResult().getFieldErrors().forEach((item) -> stringBuilder.append(item.getDefaultMessage()).append("\n"));
         return ResponseUtil.error(stringBuilder.toString());
     }
+
+    @ExceptionHandler(Throwable.class)
+    public Response handleCommonException(Throwable throwable){
+        return ResponseUtil.error(throwable.getMessage());
+    }
 }

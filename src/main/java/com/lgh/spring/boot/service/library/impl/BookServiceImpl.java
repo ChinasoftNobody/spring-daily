@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
         if (StringUtils.isEmpty(request.getKeyword())) {
             return bookRepo.findAll(PageRequest.of(request.getPage(), request.getSize()));
         }
-        return bookRepo.findAllByNameContains(request.getKeyword(), PageRequest.of(request.getPage(), request.getSize()));
+        return bookRepo.findAllByNameContaining(request.getKeyword(), PageRequest.of(request.getPage(), request.getSize()));
     }
 
     @Override
