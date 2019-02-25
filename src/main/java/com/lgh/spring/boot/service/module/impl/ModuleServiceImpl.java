@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 @Service
 public class ModuleServiceImpl implements ModuleService {
@@ -22,6 +23,7 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public MModule create(MModule module) {
+        module.generateBaseInfo();
         return moduleRepo.save(module);
     }
 
@@ -34,5 +36,10 @@ public class ModuleServiceImpl implements ModuleService {
     public boolean delete(MModule module) {
         moduleRepo.deleteById(module.getId());
         return true;
+    }
+
+    @Override
+    public Optional<MModule> findById(String id) {
+        return moduleRepo.findById(id);
     }
 }

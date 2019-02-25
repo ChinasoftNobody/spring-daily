@@ -1,21 +1,24 @@
-package com.lgh.spring.boot.mongo.model.module;
+package com.lgh.spring.boot.mongo.model.plugin;
 
+import com.lgh.spring.boot.enums.PluginType;
 import com.lgh.spring.boot.mongo.model.MBase;
-import com.lgh.spring.boot.enums.ModuleType;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Document(collection = "t_module")
-public class MModule extends MBase {
+@Document(collection = "t_plugin")
+public class MPlugin extends MBase {
     @NotEmpty
+    @Indexed(unique = true)
     private String name;
     @NotEmpty
     private String desc;
     @NotNull
-    private ModuleType type;
-
+    private PluginType type;
+    @NotNull
+    private MPluginMeta meta;
 
     public String getName() {
         return name;
@@ -33,11 +36,20 @@ public class MModule extends MBase {
         this.desc = desc;
     }
 
-    public ModuleType getType() {
+    public PluginType getType() {
         return type;
     }
 
-    public void setType(ModuleType type) {
+    public void setType(PluginType type) {
         this.type = type;
     }
+
+    public MPluginMeta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(MPluginMeta meta) {
+        this.meta = meta;
+    }
+
 }

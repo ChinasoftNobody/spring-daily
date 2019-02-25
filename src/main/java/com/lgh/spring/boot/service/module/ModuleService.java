@@ -4,6 +4,8 @@ import com.lgh.spring.boot.mongo.model.module.MModule;
 import com.lgh.spring.boot.pojo.module.FindModuleRequest;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
+
 public interface ModuleService {
     /**
      * findAll
@@ -31,4 +33,11 @@ public interface ModuleService {
      * @param module module
      */
     boolean delete(MModule module);
+
+    /**
+     * queryById
+     * @param id id
+     * @return result
+     */
+    Optional<MModule> findById(String id);
 }
