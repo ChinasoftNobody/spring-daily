@@ -15,8 +15,8 @@ public class RecordMetaValidatorImpl implements RecordMetaValidator {
 
     @Override
     public void validate(MPluginMeta meta) throws ValidatorException {
-        if (meta.getDataFields().isEmpty()) {
-            throw new ValidatorException("data field can not empty");
+        if (meta == null || meta.getDataFields().isEmpty()) {
+            return;
         }
         List<String> fieldNames = new ArrayList<>();
         meta.getDataFields().forEach(dataField -> {

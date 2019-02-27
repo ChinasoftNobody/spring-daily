@@ -1,7 +1,9 @@
 package com.lgh.spring.boot.controller.plugin;
 
+import com.lgh.spring.boot.enums.PluginType;
 import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
 import com.lgh.spring.boot.pojo.common.Response;
+import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
 import com.lgh.spring.boot.service.plugin.PluginService;
 import com.lgh.spring.boot.util.ResponseUtil;
 import org.springframework.validation.annotation.Validated;
@@ -22,16 +24,23 @@ public class PluginController {
     private PluginService pluginService;
 
     @PostMapping("/findAll")
-    public Response findAll(){
-        return ResponseUtil.success(pluginService.findAll());
+    public Response findAll(@RequestBody @Validated FindAllRequest request) {
+        return ResponseUtil.success(pluginService.findAll(request));
     }
+
     @PostMapping("/create")
-    public Response create(@RequestBody @Validated MPlugin plugin){
+    public Response create(@RequestBody @Validated MPlugin plugin) {
         return pluginService.create(plugin);
     }
+
     @PostMapping("/delete")
-    public Response delete(@RequestBody String id){
+    public Response delete(@RequestBody String id) {
         pluginService.delete(id);
         return ResponseUtil.success("ok");
+    }
+
+    @PostMapping("/queryTypes")
+    public Response queryTypes(){
+        return ResponseUtil.success(PluginType.values());
     }
 }

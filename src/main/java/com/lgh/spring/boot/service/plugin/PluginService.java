@@ -2,15 +2,16 @@ package com.lgh.spring.boot.service.plugin;
 
 import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
 import com.lgh.spring.boot.pojo.common.Response;
-
-import java.util.List;
+import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
+import org.springframework.data.domain.Page;
 
 public interface PluginService {
     /**
      * 查询插件列表
+     * @param request request
      * @return result
      */
-    List<MPlugin> findAll();
+    Page<MPlugin> findAll(FindAllRequest request);
 
     /**
      * 创建插件信息

@@ -17,7 +17,7 @@ public class MPlugin extends MBase {
     private String desc;
     @NotNull
     private PluginType type;
-    @NotNull
+
     private MPluginMeta meta;
 
     public String getName() {
