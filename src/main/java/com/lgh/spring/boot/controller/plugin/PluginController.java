@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 插件管理
@@ -42,5 +43,14 @@ public class PluginController {
     @PostMapping("/queryTypes")
     public Response queryTypes(){
         return ResponseUtil.success(PluginType.values());
+    }
+
+    @PostMapping("/queryPluginById")
+    public Response queryPluginById(@RequestBody @Validated @NotEmpty String id){
+        MPlugin result = pluginService.queryPluginById(id);
+        if (result == null){
+            return ResponseUtil.error("not found this plugin");
+        }
+        return ResponseUtil.success(result);
     }
 }

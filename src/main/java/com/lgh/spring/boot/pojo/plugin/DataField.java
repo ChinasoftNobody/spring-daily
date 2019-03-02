@@ -11,6 +11,7 @@ public class DataField {
     private String name;
     @NotNull
     private DataFieldType type;
+    private String desc;
     private String defaultValue;
     @NotNull
     private boolean required;
@@ -75,5 +76,13 @@ public class DataField {
 
     public void setValidatorType(ValidatorType validatorType) {
         this.validatorType = validatorType;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

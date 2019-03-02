@@ -25,4 +25,11 @@ public interface PluginService {
      * @param id id
      */
     void delete(String id);
+
+    /**
+     * 根据ID查询插件信息
+     * @param id id
+     * @return result
+     */
+    MPlugin queryPluginById(String id);
 }
