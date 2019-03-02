@@ -32,4 +32,11 @@ public interface PluginService {
      * @return result
      */
     MPlugin queryPluginById(String id);
+
+    /**
+     * update
+     * @param plugin plugin
+     * @return result
+     */
+    MPlugin update(MPlugin plugin);
 }

@@ -38,7 +38,9 @@ public class PluginServiceImpl implements PluginService {
     public Response create(MPlugin plugin) {
         try {
             if (plugin.getMeta() == null){
-                plugin.setMeta(new MPluginMeta());
+                MPluginMeta meta = new MPluginMeta();
+                meta.setDataFields(Collections.emptyList());
+                plugin.setMeta(meta);
             }
             plugin.getMeta().generateBaseInfo();
             plugin.generateBaseInfo();
@@ -66,5 +68,10 @@ public class PluginServiceImpl implements PluginService {
             }
         });
         return plugin.orElse(null);
+    }
+
+    @Override
+    public MPlugin update(MPlugin plugin) {
+        return pluginRepo.save(plugin);
     }
 }

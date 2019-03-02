@@ -1,6 +1,8 @@
 package com.lgh.spring.boot.controller.plugin;
 
+import com.lgh.spring.boot.enums.DataFieldType;
 import com.lgh.spring.boot.enums.PluginType;
+import com.lgh.spring.boot.enums.ValidatorType;
 import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
@@ -41,16 +43,29 @@ public class PluginController {
     }
 
     @PostMapping("/queryTypes")
-    public Response queryTypes(){
+    public Response queryTypes() {
         return ResponseUtil.success(PluginType.values());
     }
 
     @PostMapping("/queryPluginById")
-    public Response queryPluginById(@RequestBody @Validated @NotEmpty String id){
+    public Response queryPluginById(@RequestBody @Validated @NotEmpty String id) {
         MPlugin result = pluginService.queryPluginById(id);
-        if (result == null){
+        if (result == null) {
             return ResponseUtil.error("not found this plugin");
         }
         return ResponseUtil.success(result);
+    }
+
+    @PostMapping("/update")
+    public Response update(@RequestBody @Validated MPlugin plugin) {
+        return ResponseUtil.success(pluginService.update(plugin));
+    }
+    @PostMapping("/queryFieldType")
+    public Response queryFieldType(){
+        return ResponseUtil.success(DataFieldType.values());
+    }
+    @PostMapping("/queryValidatorType")
+    public Response queryValidatorType(){
+        return ResponseUtil.success(ValidatorType.values());
     }
 }
