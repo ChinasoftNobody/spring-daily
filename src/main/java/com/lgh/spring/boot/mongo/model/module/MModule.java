@@ -1,11 +1,15 @@
 package com.lgh.spring.boot.mongo.model.module;
 
-import com.lgh.spring.boot.mongo.model.MBase;
 import com.lgh.spring.boot.enums.ModuleType;
+import com.lgh.spring.boot.mongo.model.MBase;
+import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.List;
 
 @Document(collection = "t_module")
 public class MModule extends MBase {
@@ -15,7 +19,8 @@ public class MModule extends MBase {
     private String desc;
     @NotNull
     private ModuleType type;
-
+    @DBRef
+    private List<MPlugin> plugins = Collections.emptyList();
 
     public String getName() {
         return name;
@@ -39,5 +44,13 @@ public class MModule extends MBase {
 
     public void setType(ModuleType type) {
         this.type = type;
+    }
+
+    public List<MPlugin> getPlugins() {
+        return plugins;
+    }
+
+    public void setPlugins(List<MPlugin> plugins) {
+        this.plugins = plugins;
     }
 }

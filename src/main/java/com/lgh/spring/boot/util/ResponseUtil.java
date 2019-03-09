@@ -9,7 +9,7 @@ public class ResponseUtil {
      * @param result result
      * @return response
      */
-    public static Response success(Object result){
+    public static <T> Response<T> success(T result){
         return new Response(true, null, result);
     }
 
@@ -19,7 +19,7 @@ public class ResponseUtil {
      * @param error reason
      * @return response
      */
-    public static Response error(String error) {
+    public static <T> Response<T> error(String error) {
         return new Response(false, error, null);
     }
 }

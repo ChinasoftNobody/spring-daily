@@ -5,6 +5,8 @@ import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface PluginService {
     /**
      * 查询插件列表
@@ -18,7 +20,7 @@ public interface PluginService {
      * @param plugin plugin
      * @return result
      */
-    Response create(MPlugin plugin);
+    Response<MPlugin> create(MPlugin plugin);
 
     /**
      * 根据ID删除插件
@@ -39,4 +41,11 @@ public interface PluginService {
      * @return result
      */
     MPlugin update(MPlugin plugin);
+
+    /**
+     * queryByModuleId
+     * @param id id
+     * @return result
+     */
+    List<MPlugin> queryByModuleId(String id);
 }

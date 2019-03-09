@@ -8,6 +8,7 @@ import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
 import com.lgh.spring.boot.service.plugin.PluginService;
 import com.lgh.spring.boot.util.ResponseUtil;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,17 +28,17 @@ public class PluginController {
     private PluginService pluginService;
 
     @PostMapping("/findAll")
-    public Response findAll(@RequestBody @Validated FindAllRequest request) {
+    public Response<Page<MPlugin>> findAll(@RequestBody @Validated FindAllRequest request) {
         return ResponseUtil.success(pluginService.findAll(request));
     }
 
     @PostMapping("/create")
-    public Response create(@RequestBody @Validated MPlugin plugin) {
+    public Response<MPlugin> create(@RequestBody @Validated MPlugin plugin) {
         return pluginService.create(plugin);
     }
 
     @PostMapping("/delete")
-    public Response delete(@RequestBody String id) {
+    public Response<String> delete(@RequestBody String id) {
         pluginService.delete(id);
         return ResponseUtil.success("ok");
     }
@@ -48,7 +49,7 @@ public class PluginController {
     }
 
     @PostMapping("/queryPluginById")
-    public Response queryPluginById(@RequestBody @Validated @NotEmpty String id) {
+    public Response<MPlugin> queryPluginById(@RequestBody @Validated @NotEmpty String id) {
         MPlugin result = pluginService.queryPluginById(id);
         if (result == null) {
             return ResponseUtil.error("not found this plugin");
@@ -57,15 +58,17 @@ public class PluginController {
     }
 
     @PostMapping("/update")
-    public Response update(@RequestBody @Validated MPlugin plugin) {
+    public Response<MPlugin> update(@RequestBody @Validated MPlugin plugin) {
         return ResponseUtil.success(pluginService.update(plugin));
     }
+
     @PostMapping("/queryFieldType")
-    public Response queryFieldType(){
+    public Response<DataFieldType[]> queryFieldType() {
         return ResponseUtil.success(DataFieldType.values());
     }
+
     @PostMapping("/queryValidatorType")
-    public Response queryValidatorType(){
+    public Response<ValidatorType[]> queryValidatorType() {
         return ResponseUtil.success(ValidatorType.values());
     }
 }

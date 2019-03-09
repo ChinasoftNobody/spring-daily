@@ -1,8 +1,10 @@
 package com.lgh.spring.boot.service.plugin.impl;
 
 import com.lgh.spring.boot.common.ValidatorException;
+import com.lgh.spring.boot.mongo.model.module.MModule;
 import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
 import com.lgh.spring.boot.mongo.model.plugin.MPluginMeta;
+import com.lgh.spring.boot.mongo.repo.ModuleRepo;
 import com.lgh.spring.boot.mongo.repo.PluginRepo;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
@@ -16,12 +18,15 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PluginServiceImpl implements PluginService {
     @Resource
     private PluginRepo pluginRepo;
+    @Resource
+    private ModuleRepo moduleRepo;
     @Resource
     private PluginValidator pluginValidatorImpl;
 
@@ -35,7 +40,7 @@ public class PluginServiceImpl implements PluginService {
     }
 
     @Override
-    public Response create(MPlugin plugin) {
+    public Response<MPlugin> create(MPlugin plugin) {
         try {
             if (plugin.getMeta() == null){
                 MPluginMeta meta = new MPluginMeta();
@@ -73,5 +78,10 @@ public class PluginServiceImpl implements PluginService {
     @Override
     public MPlugin update(MPlugin plugin) {
         return pluginRepo.save(plugin);
+    }
+
+    @Override
+    public List<MPlugin> queryByModuleId(String id) {
+        return moduleRepo.findById(id).orElse(new MModule()).getPlugins();
     }
 }
