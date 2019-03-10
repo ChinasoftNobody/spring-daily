@@ -2,6 +2,7 @@ package com.lgh.spring.boot.mongo.model.plugin;
 
 import com.lgh.spring.boot.enums.PluginType;
 import com.lgh.spring.boot.mongo.model.MBase;
+import com.lgh.spring.boot.pojo.plugin.PluginMeta;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,8 +18,7 @@ public class MPlugin extends MBase {
     private String desc;
     @NotNull
     private PluginType type;
-
-    private MPluginMeta meta;
+    private PluginMeta meta;
 
     public String getName() {
         return name;
@@ -44,11 +44,11 @@ public class MPlugin extends MBase {
         this.type = type;
     }
 
-    public MPluginMeta getMeta() {
+    public PluginMeta getMeta() {
         return meta;
     }
 
-    public void setMeta(MPluginMeta meta) {
+    public void setMeta(PluginMeta meta) {
         this.meta = meta;
     }
 

@@ -8,4 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface ModuleRepo extends MongoRepository<MModule, String> {
 
     Page<MModule> findByNameContaining(String name, Pageable pageable);
+
 }

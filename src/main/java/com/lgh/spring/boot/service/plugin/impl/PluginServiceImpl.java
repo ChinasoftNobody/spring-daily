@@ -3,8 +3,9 @@ package com.lgh.spring.boot.service.plugin.impl;
 import com.lgh.spring.boot.common.ValidatorException;
 import com.lgh.spring.boot.mongo.model.module.MModule;
 import com.lgh.spring.boot.mongo.model.plugin.MPlugin;
-import com.lgh.spring.boot.mongo.model.plugin.MPluginMeta;
+import com.lgh.spring.boot.pojo.plugin.PluginMeta;
 import com.lgh.spring.boot.mongo.repo.ModuleRepo;
+import com.lgh.spring.boot.mongo.repo.PluginMetaRepo;
 import com.lgh.spring.boot.mongo.repo.PluginRepo;
 import com.lgh.spring.boot.pojo.common.Response;
 import com.lgh.spring.boot.pojo.plugin.FindAllRequest;
@@ -28,6 +29,8 @@ public class PluginServiceImpl implements PluginService {
     @Resource
     private ModuleRepo moduleRepo;
     @Resource
+    private PluginMetaRepo pluginMetaRepo;
+    @Resource
     private PluginValidator pluginValidatorImpl;
 
     @Override
@@ -43,11 +46,10 @@ public class PluginServiceImpl implements PluginService {
     public Response<MPlugin> create(MPlugin plugin) {
         try {
             if (plugin.getMeta() == null){
-                MPluginMeta meta = new MPluginMeta();
+                PluginMeta meta = new PluginMeta();
                 meta.setDataFields(Collections.emptyList());
                 plugin.setMeta(meta);
             }
-            plugin.getMeta().generateBaseInfo();
             plugin.generateBaseInfo();
             pluginValidatorImpl.validate(plugin);
             return ResponseUtil.success(pluginRepo.save(plugin));
@@ -66,8 +68,7 @@ public class PluginServiceImpl implements PluginService {
         Optional<MPlugin> plugin = pluginRepo.findById(id);
         plugin.ifPresent(plugin1 -> {
             if (plugin1.getMeta() == null){
-                MPluginMeta meta = new MPluginMeta();
-                meta.generateBaseInfo();
+                PluginMeta meta = new PluginMeta();
                 meta.setDataFields(Collections.emptyList());
                 plugin1.setMeta(meta);
             }

@@ -1,7 +1,7 @@
 package com.lgh.spring.boot.service.plugin.impl;
 
 import com.lgh.spring.boot.common.ValidatorException;
-import com.lgh.spring.boot.mongo.model.plugin.MPluginMeta;
+import com.lgh.spring.boot.pojo.plugin.PluginMeta;
 import com.lgh.spring.boot.service.plugin.RecordMetaValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -14,7 +14,7 @@ public class RecordMetaValidatorImpl implements RecordMetaValidator {
 
 
     @Override
-    public void validate(MPluginMeta meta) throws ValidatorException {
+    public void validate(PluginMeta meta) throws ValidatorException {
         if (meta == null || meta.getDataFields() == null || meta.getDataFields().isEmpty()) {
             return;
         }
