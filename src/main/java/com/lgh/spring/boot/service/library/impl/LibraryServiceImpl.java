@@ -35,7 +35,7 @@ public class LibraryServiceImpl implements LibraryService {
             String searchUrl = form.attr("action") + "?func=find-b&find_code=WRD&filter_code_1=WLN&" +
                     "filter_request_1=&filter_code_2=WYR&filter_request_2=&filter_code_3=WYR&filter_request_3=" +
                     "&filter_code_4=WFM&filter_request_4=&filter_code_5=WSL&filter_request_5=" +
-                    "&request=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+                    "&request=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
             Document document = Jsoup.connect(searchUrl).get();
             Elements elements = document.select("table.items");
             elements.forEach((element -> {

@@ -28,7 +28,7 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<MRecord> findByModuleId(String id) {
         Optional<MModule> module = moduleRepo.findById(id);
-        if (module.isEmpty() || module.get().getPlugins().isEmpty()) {
+        if (!module.isPresent() || module.get().getPlugins().isEmpty()) {
             return Collections.emptyList();
         }
         List<MPlugin> plugins = module.get().getPlugins().stream()
