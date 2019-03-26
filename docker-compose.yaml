@@ -2,18 +2,18 @@ version: '3'
 networks:
   bridge:
 services:
-#  nginx:
-#    container_name: daily-nginx
-#    image: nginx:latest
-#    hostname: daily-nginx
-#    restart: always
-#    networks:
-#      - network
-#    ports:
-#      - 80:80
-#      - 443:443
-#    volumes:
-#      - ./nginx/conf.d:/etc/nginx/conf.d
+  nginx:
+    container_name: daily-nginx
+    image: nginx:latest
+    hostname: daily-nginx
+    restart: always
+    networks:
+      - bridge
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
 
   mongo1:
     container_name: daily-mongo-1
@@ -54,21 +54,26 @@ services:
     restart: always
     entrypoint: mongod --replSet mongo-set --bind_ip daily-mongo3 --port 27017
 
-#  app:
-#    container_name: daily-service
-#    restart: always
-#    networks:
-#      - network
-#    build: .
-#    working_dir: /app
-#    volumes:
-#      - .:/app
-#      - ~/.m2:/root/.m2
-#    expose:
-#      - "8081"
-#    depends_on:
-#      - nginx
-#      - mongo1
-#      - mongo2
-#      - mongo3
-#    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
+  app:
+    container_name: daily-service
+    restart: always
+    networks:
+      - bridge
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /home/maysham/.m2:/root/.m2
+    expose:
+      - "8081"
+    depends_on:
+      - nginx
+      - mongo1
+      - mongo2
+      - mongo3
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mvn clean package
+        java -jar /app/target/daily-0.0.1-SNAPSHOT.jar --spring.profiles.active=docker
